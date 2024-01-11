@@ -25,14 +25,7 @@ class CommonService {
     final result = await _commonRepository.getProfile(uid);
     return result.when(
       success: (data) {
-        if (data.role.value != RoleUser.doctor.value) {
-          return Result.failure(
-            const NetworkExceptions.notFound('User not found'),
-            StackTrace.current,
-          );
-        } else {
-          return Result.success(data);
-        }
+        return Result.success(data);
       },
       failure: (error, stackTrace) {
         return Result.failure(error, stackTrace);

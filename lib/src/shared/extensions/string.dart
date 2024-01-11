@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:geats/src/features/auth/domain/user.dart';
 
 extension XString on String {
   String get trimList => replaceAll('[', '').replaceAll(']', '');
@@ -60,19 +59,6 @@ extension XString on String {
         return Icons.more_horiz;
       default:
         return Icons.more_horiz;
-    }
-  }
-
-  RoleUser get roleUser {
-    switch (this) {
-      case 'USER':
-        return RoleUser.user;
-      case 'SUPERADMIN':
-        return RoleUser.superadmin;
-      case 'DOCTOR':
-        return RoleUser.doctor;
-      default:
-        return RoleUser.user;
     }
   }
 }

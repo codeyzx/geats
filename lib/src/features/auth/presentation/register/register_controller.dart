@@ -28,10 +28,9 @@ class RegisterController extends StateNotifier<RegisterState> {
     );
 
     final requestRegister = RequestRegister(
-      fullname: nameController.text,
+      name: nameController.text,
       email: emailController.text,
       password: passwordController.text,
-      role: state.roleValue,
     );
 
     final result = await _authService.register(requestRegister);
@@ -131,7 +130,7 @@ class RegisterController extends StateNotifier<RegisterState> {
 }
 
 final registerControllerProvider =
-    StateNotifierProvider<RegisterController, RegisterState>((ref) {
+    StateNotifierProvider.autoDispose<RegisterController, RegisterState>((ref) {
   final authService = ref.read(authServiceProvider);
   return RegisterController(authService);
 });

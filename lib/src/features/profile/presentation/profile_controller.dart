@@ -18,8 +18,6 @@ class UserController extends StateNotifier<UserState> {
 
   void setData(User user) {
     nameController.text = user.name;
-    priceController.text = user.price.toString();
-    polyController.text = user.polyclinic;
     state = state.copyWith(
       user: user,
       userValue: AsyncData(user),
@@ -34,8 +32,6 @@ class UserController extends StateNotifier<UserState> {
     final user = RequestUser(
       id: state.user!.id,
       name: nameController.text,
-      price: int.parse(priceController.text),
-      polyclinic: polyController.text,
     );
 
     final result = await _commonService.updateProfile(user);

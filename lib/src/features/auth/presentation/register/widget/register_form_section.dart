@@ -26,19 +26,19 @@ class RegisterFormSection extends ConsumerWidget {
           ),
           Gap.h36,
           InputFormWidget(
-            controller: controller.emailController,
-            onChanged: (value) {},
-            hintText: 'abc@gmail.com',
-            prefixIcon: Icons.email_outlined,
-            validator: controller.validateEmail,
-          ),
-          Gap.h16,
-          InputFormWidget(
             controller: controller.nameController,
             onChanged: (value) {},
             hintText: 'Full name',
             prefixIcon: Icons.person_outline_rounded,
             validator: controller.validateName,
+          ),
+          Gap.h16,
+          InputFormWidget(
+            controller: controller.emailController,
+            onChanged: (value) {},
+            hintText: 'abc@gmail.com',
+            prefixIcon: Icons.email_outlined,
+            validator: controller.validateEmail,
           ),
           Gap.h16,
           InputFormWidget.password(

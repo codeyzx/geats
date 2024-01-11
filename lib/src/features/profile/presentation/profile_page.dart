@@ -21,6 +21,39 @@ class ProfilePage extends ConsumerWidget {
       backgroundColor: Colors.white,
       body: AsyncValueWidget(
         value: state.userValue,
+        error: (errorWidget) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Text(
+                  'Something went wrong!',
+                  style: TypographyApp.headline3,
+                ),
+              ),
+              Gap.h16,
+              // button to exit
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    controller.logout();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: HexColor('#DB3F3F'),
+                    minimumSize: Size(0.8.sw, 48.h),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
+                  ),
+                  child: Text(
+                    'Exit',
+                    style: TypographyApp.whiteOnBtnSmall,
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
         data: (data) => SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -78,7 +111,7 @@ class ProfilePage extends ConsumerWidget {
                           height: 2.h,
                         ),
                         Text(
-                          'Dokter Poli ${state.user!.polyclinic}',
+                          'Dokter Umum',
                           style: TypographyApp.profileJob,
                         ),
                       ],
