@@ -1,0 +1,75 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:geats/src/constants/constants.dart';
+import 'package:geats/src/features/auth/domain/user.dart';
+import 'package:geats/src/features/common/presentation/botnavbar/botnavbar_page.dart';
+import 'package:geats/src/features/common/presentation/splash/splash_page.dart';
+import 'package:geats/src/features/profile/presentation/profile_edit_page.dart';
+import 'package:geats/src/features/common/presentation/onboard/onboard_page.dart';
+import 'package:geats/src/features/presentation.dart';
+import 'package:geats/src/routes/routes.dart';
+
+enum Routes {
+  splash,
+  onboard,
+  login,
+  register,
+  botNavBar,
+  editProfile,
+}
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+final goRouterProvider = Provider<GoRouter>(
+  (ref) {
+    return GoRouter(
+      navigatorKey: navigatorKey,
+      debugLogDiagnostics: true,
+      initialLocation: '/splash',
+      routerNeglect: true,
+      redirectLimit: 1,
+      routes: [
+        GoRoute(
+          path: '/splash',
+          name: Routes.splash.name,
+          builder: (context, state) => const SplashPage(),
+        ),
+        GoRoute(
+          path: '/onboard',
+          name: Routes.onboard.name,
+          builder: (context, state) => const OnboardPage(),
+        ),
+        GoRoute(
+          path: '/login',
+          name: Routes.login.name,
+          builder: (context, state) => const LoginPage(),
+        ),
+        GoRoute(
+          path: '/register',
+          name: Routes.register.name,
+          builder: (context, state) => const RegisterPage(),
+        ),
+        GoRoute(
+          path: '/botnavbar',
+          name: Routes.botNavBar.name,
+          builder: (context, state) => const BotNavBarPage(),
+        ),
+        GoRoute(
+          path: '/edit-profile-page',
+          name: Routes.editProfile.name,
+          builder: (context, state) {
+            final extras = state.extra as Extras;
+            final user = extras.datas[ExtrasKey.user] as User;
+            return ProfileEditPage(
+              user: user,
+            );
+          },
+        ),
+      ],
+      errorBuilder: (context, state) => ErrorPage(
+        error: state.error,
+      ),
+    );
+  },
+);

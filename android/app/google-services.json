@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "182831275093",
+    "project_id": "geats-df96b",
+    "storage_bucket": "geats-df96b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182831275093:android:606872f13130db6d6f08dc",
+        "android_client_info": {
+          "package_name": "com.geats"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFOTEympzjTSmAnxf9v1MpDEGVWb5l2L4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

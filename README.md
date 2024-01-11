@@ -1,0 +1,105 @@
+[![Contributors][contributors-shield]][contributors-url]
+
+[![Forks][forks-shield]][forks-url]
+
+[![Stargazers][stars-shield]][stars-url]
+
+[![Issues][issues-shield]][issues-url]
+
+[![MIT License][license-shield]][license-url]
+
+<!-- PROJECT LOGO -->
+
+<br />
+
+<div  align="center">
+
+<a  href="https://github.com/codeyzx/geats">
+
+<img  src="assets/icons/ic_launcher.png"  alt="Logo"  width="240">
+
+</a>
+
+<h3  align="center">Geats</h3>
+
+<p  align="center">
+
+Geats is an innovative application designed to address issues related to food sustainability. It not only provides accurate and fast nutritional information but also serves as a forefront solution for tackling food waste.
+
+<br/>
+<br/>
+
+<a  href="https://github.com/codeyzx/geats">View Demo</a>
+·
+<a  href="https://github.com/codeyzx/geats/issues">Report Bug</a>
+·
+<a  href="https://github.com/codeyzx/geats/issues">Request Feature</a>
+
+</p>
+
+</div>
+
+## Features
+
+### 1. Nutritional Analysis with AI
+
+Geats utilizes Artificial Intelligence (AI) to analyze nutrition accurately and quickly. Users can easily access real-time information about calories, nutrients, and other nutritional aspects of the food they consume.
+
+### 2. Food Comparison
+
+The application includes a food comparison feature, allowing users to compare the nutritional content of two or more types of food. This empowers users to make healthier food choices with a powerful tool at their disposal.
+
+### 3. Personalized Diet Planning
+
+Geats can plan users' daily diets with personalization in mind. Considering individual preferences, allergies, and nutritional needs, the app provides food recommendations to help users achieve their health goals.
+
+### 4. Food Redistribution and Rewards
+
+An innovative feature involves the redirection of leftover food. Users who donate their excess food to food banks receive reward coins as a form of incentive. These coins can be exchanged for various benefits, creating a positive incentive for users to participate in food sustainability efforts.
+
+### 5. Waste Utilization
+
+Geats encourages users to repurpose their food waste by turning it into compost, food for maggots, or food that can be consumed again.
+
+### 6. Health Education Platform
+
+The app is not just an information provider; it also functions as a health education platform. Informative articles, webinars, and other multimedia content help enhance users' understanding of the importance of health and the impact of food on the body.
+
+## Technologies Used
+
+- Flutter
+- Firebase (Authentication, Firestore Database, Storage)
+
+## Getting Started
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-username/geats.git
+   ```
+2. Install dependencies:
+   ```sh
+   flutter pub get
+   ```
+3. Run the application:
+   ```sh
+   flutter run
+   ```
+
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<!-- MARKDOWN LINKS & IMAGES -->
+
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/codeyzx/geats.svg?style=for-the-badge
+[contributors-url]: https://github.com/codeyzx/geats/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/codeyzx/geats.svg?style=for-the-badge
+[forks-url]: https://github.com/codeyzx/geats/network/members
+[stars-shield]: https://img.shields.io/github/stars/codeyzx/geats.svg?style=for-the-badge
+[stars-url]: https://github.com/codeyzx/geats/stargazers
+[issues-shield]: https://img.shields.io/github/issues/codeyzx/geats.svg?style=for-the-badge
+[issues-url]: https://github.com/codeyzx/geats/issues
+[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-url]: https://github.com/codeyzx/geats/blob/main/LICENSE.txt
