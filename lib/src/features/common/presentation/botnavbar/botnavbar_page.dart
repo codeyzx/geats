@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geats/gen/assets.gen.dart';
 import 'package:geats/src/constants/constants.dart';
 import 'package:geats/src/features/common/presentation/common_controller.dart';
+import 'package:geats/src/routes/routes.dart';
+import 'package:go_router/go_router.dart';
 
 class BotNavBarPage extends ConsumerWidget {
   const BotNavBarPage({super.key});
@@ -37,7 +39,7 @@ class BotNavBarPage extends ConsumerWidget {
                 height: 28.h,
               ),
               onPressed: () {
-                controller.setPage(2);
+                context.pushNamed(Routes.camera.name);
               },
             ),
           ),

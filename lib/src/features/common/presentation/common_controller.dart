@@ -73,12 +73,10 @@ class CommonController extends StateNotifier<CommonState> {
         return const HomePage();
       case 1:
         return const ProfilePage();
-      case 2:
-        return const HomePage();
       case 3:
         return const ProfilePage();
       case 4:
-        return const HomePage();
+        return const ProfilePage();
       default:
         return const HomePage();
     }

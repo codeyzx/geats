@@ -16,6 +16,7 @@ enum Routes {
   login,
   register,
   botNavBar,
+  camera,
   editProfile,
 }
 

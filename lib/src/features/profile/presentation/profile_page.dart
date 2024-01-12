@@ -9,6 +9,7 @@ import 'package:geats/src/features/common/presentation/common_controller.dart';
 import 'package:geats/src/routes/app_routes.dart';
 import 'package:geats/src/routes/extras.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:quickalert/quickalert.dart';
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
@@ -101,7 +102,7 @@ class ProfilePage extends ConsumerWidget {
                             child: FittedBox(
                               fit: BoxFit.scaleDown,
                               child: Text(
-                                'Dr. ${state.user!.name}',
+                                state.user!.name,
                                 style: TypographyApp.homeDetName,
                               ),
                             ),
@@ -111,7 +112,7 @@ class ProfilePage extends ConsumerWidget {
                           height: 2.h,
                         ),
                         Text(
-                          'Dokter Umum',
+                          '78 Kilogram',
                           style: TypographyApp.profileJob,
                         ),
                       ],
@@ -434,7 +435,18 @@ class ProfilePage extends ConsumerWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    controller.logout();
+                    QuickAlert.show(
+                        context: context,
+                        type: QuickAlertType.warning,
+                        title: 'Keluar',
+                        text: 'Apakah anda yakin ingin keluar dari akun ini?',
+                        showCancelBtn: true,
+                        cancelBtnText: 'Batal',
+                        confirmBtnText: 'Keluar',
+                        confirmBtnColor: HexColor('#DB3F3F'),
+                        onConfirmBtnTap: () {
+                          controller.logout();
+                        });
                   },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,

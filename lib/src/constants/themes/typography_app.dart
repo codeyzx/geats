@@ -324,7 +324,7 @@ class TypographyApp {
     fontSize: 14.sp,
   );
   static TextStyle profileJob = GoogleFonts.montserrat(
-    color: HexColor('#3DA9FC'),
+    color: ColorApp.primary,
     fontWeight: FontWeight.w500,
     fontSize: 14.sp,
   );

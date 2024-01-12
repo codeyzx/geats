@@ -11,7 +11,8 @@ part 'network_exceptions.freezed.dart';
 abstract class NetworkExceptions with _$NetworkExceptions {
   const factory NetworkExceptions.requestCancelled() = RequestCancelled;
 
-  const factory NetworkExceptions.unauthorizedRequest(String reason, bool isUnauthorizedRequest) = UnauthorizedRequest;
+  const factory NetworkExceptions.unauthorizedRequest(
+      String reason, bool isUnauthorizedRequest) = UnauthorizedRequest;
 
   const factory NetworkExceptions.badRequest() = BadRequest;
 
@@ -27,7 +28,8 @@ abstract class NetworkExceptions with _$NetworkExceptions {
 
   const factory NetworkExceptions.conflict() = Conflict;
 
-  const factory NetworkExceptions.internalServerError(String reason) = InternalServerError;
+  const factory NetworkExceptions.internalServerError(String reason) =
+      InternalServerError;
 
   const factory NetworkExceptions.notImplemented() = NotImplemented;
 
@@ -104,7 +106,7 @@ abstract class NetworkExceptions with _$NetworkExceptions {
               break;
             case 'invalid-credential':
               networkExceptions = const NetworkExceptions.unauthorizedRequest(
-                'Invalid credential',
+                'Email or password is incorrect',
                 true,
               );
               break;
@@ -118,7 +120,8 @@ abstract class NetworkExceptions with _$NetworkExceptions {
               networkExceptions = const NetworkExceptions.serviceUnavailable();
               break;
             case 'internal':
-              networkExceptions = const NetworkExceptions.internalServerError('Internal');
+              networkExceptions =
+                  const NetworkExceptions.internalServerError('Internal');
               break;
             case 'not-found':
               networkExceptions = const NetworkExceptions.notFound('Not found');

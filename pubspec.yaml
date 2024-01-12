@@ -28,14 +28,14 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  flutter:
-    sdk: flutter
-
   cached_network_image: ^3.3.1
+  camera: ^0.10.5+9
   cloud_firestore: ^4.14.0
   cupertino_icons: ^1.0.6
   firebase_auth: ^4.16.0
   firebase_core: ^2.24.2
+  flutter:
+    sdk: flutter
   flutter_riverpod: ^2.4.9
   flutter_screenutil: ^5.9.0
   flutter_svg: ^2.0.9
@@ -45,13 +45,16 @@ dependencies:
   hexcolor: ^3.0.1
   intl: ^0.19.0
   logger: ^2.0.2+1
+  path_provider: ^2.1.2
+  permission_handler: ^11.1.0
   quickalert: ^1.0.2
   shared_preferences: ^2.2.2
   smooth_page_indicator: ^1.1.0
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  build_runner: ^2.4.7
+  flutter_gen: ^5.4.0
+  flutter_launcher_icons: ^0.13.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -59,9 +62,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.1
-  build_runner: ^2.4.7
-  flutter_gen: ^5.4.0
-  flutter_launcher_icons: ^0.13.1
+  flutter_test:
+    sdk: flutter
 
 flutter_gen:
   integrations:
@@ -75,7 +77,6 @@ flutter_launcher_icons:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter packages.
 flutter:
 
@@ -95,10 +96,8 @@ flutter:
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
