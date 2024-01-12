@@ -393,4 +393,15 @@ class TypographyApp {
     color: Colors.white,
     fontWeight: FontWeight.w500,
   );
+
+  static TextStyle titleScan = GoogleFonts.montserrat(
+    color: ColorApp.black,
+    fontWeight: FontWeight.w700,
+    fontSize: 16.sp,
+  );
+  static TextStyle descScan = GoogleFonts.montserrat(
+    color: ColorApp.black,
+    fontWeight: FontWeight.w400,
+    fontSize: 12.sp,
+  );
 }

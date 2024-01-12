@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geats/src/features/scan/presentation/nutrition_facts_page.dart';
+import 'package:geats/src/features/scan/presentation/scan_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:geats/src/constants/constants.dart';
 import 'package:geats/src/features/auth/domain/user.dart';
@@ -16,7 +18,8 @@ enum Routes {
   login,
   register,
   botNavBar,
-  camera,
+  scan,
+  nutriFacts,
   editProfile,
 }
 
@@ -55,6 +58,23 @@ final goRouterProvider = Provider<GoRouter>(
           path: '/botnavbar',
           name: Routes.botNavBar.name,
           builder: (context, state) => const BotNavBarPage(),
+        ),
+        GoRoute(
+          path: '/scan',
+          name: Routes.scan.name,
+          builder: (context, state) => const ScanPage(),
+        ),
+        GoRoute(
+          path: '/nutri-facts',
+          name: Routes.nutriFacts.name,
+          builder: (context, state) {
+            // final extras = state.extra as Extras;
+            // final barcode = extras.datas[ExtrasKey.barcode] as Barcode;
+            // return NutritionFactsPage(
+            //   barcode: barcode,
+            // );
+            return const NutritionFactsPage();
+          },
         ),
         GoRoute(
           path: '/edit-profile-page',

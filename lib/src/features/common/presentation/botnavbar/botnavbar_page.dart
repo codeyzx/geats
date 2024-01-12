@@ -39,7 +39,7 @@ class BotNavBarPage extends ConsumerWidget {
                 height: 28.h,
               ),
               onPressed: () {
-                context.pushNamed(Routes.camera.name);
+                context.pushNamed(Routes.scan.name);
               },
             ),
           ),
@@ -47,8 +47,6 @@ class BotNavBarPage extends ConsumerWidget {
         bottomNavigationBar: BottomNavigationBar(
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          unselectedFontSize: 0,
-          selectedFontSize: 0,
           type: BottomNavigationBarType.fixed,
           iconSize: 24.0.sp,
           currentIndex: currentIndex,
