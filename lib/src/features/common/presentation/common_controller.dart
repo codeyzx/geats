@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geats/src/features/recycle/presentation/recycle_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:geats/src/features/common/application/common_service.dart';
 // import 'package:geats/src/features/history/presentation/history_page.dart';
@@ -74,7 +75,7 @@ class CommonController extends StateNotifier<CommonState> {
       case 1:
         return const ProfilePage();
       case 3:
-        return const ProfilePage();
+        return const RecyclePage();
       case 4:
         return const ProfilePage();
       default:

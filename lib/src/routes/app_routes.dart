@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geats/src/features/recycle/presentation/recycle_page.dart';
 import 'package:geats/src/features/scan/presentation/nutrition_facts_page.dart';
 import 'package:geats/src/features/scan/presentation/scan_page.dart';
 import 'package:go_router/go_router.dart';
@@ -20,6 +21,7 @@ enum Routes {
   botNavBar,
   scan,
   nutriFacts,
+  recycle,
   editProfile,
 }
 
@@ -75,6 +77,11 @@ final goRouterProvider = Provider<GoRouter>(
             // );
             return const NutritionFactsPage();
           },
+        ),
+        GoRoute(
+          path: '/recylce',
+          name: Routes.recycle.name,
+          builder: (context, state) => const RecyclePage(), 
         ),
         GoRoute(
           path: '/edit-profile-page',
