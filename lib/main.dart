@@ -87,9 +87,10 @@ class CustomErrorWidget extends StatelessWidget {
 }
 
 final _appTheme = ThemeData(
-  progressIndicatorTheme: const ProgressIndicatorThemeData(
+  useMaterial3: true,
+  progressIndicatorTheme: ProgressIndicatorThemeData(
     circularTrackColor: ColorApp.white,
-    color: ColorApp.orange,
+    color: ColorApp.primary,
   ),
   dividerColor: Colors.transparent,
   fontFamily: 'Poppins',
