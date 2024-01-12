@@ -74,7 +74,7 @@ The app is not just an information provider; it also functions as a health educa
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/geats.git
+   git clone https://github.com/codeyzx/geats.git
    ```
 2. Install dependencies:
    ```sh
