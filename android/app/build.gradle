@@ -70,5 +70,10 @@ dependencies {
     implementation 'com.google.mlkit:face-detection:16.1.5'
     implementation 'com.google.mlkit:vision-common:17.3.0'
     
+    implementation 'com.google.mlkit:text-recognition-chinese:16.0.0-beta6'
+    implementation 'com.google.mlkit:text-recognition-devanagari:16.0.0-beta6'
+    implementation 'com.google.mlkit:text-recognition-japanese:16.0.0-beta6'
+    implementation 'com.google.mlkit:text-recognition-korean:16.0.0-beta6'
+    
     implementation platform('com.google.firebase:firebase-bom:32.7.0')
 }
