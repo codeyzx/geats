@@ -1,19 +1,23 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geats/src/features/scan/domain/nutrifacts.dart';
 
 class ScanState {
-  final AsyncValue<String?> value;
+  final AsyncValue<List<NutriFacts>> nutriValue;
+  final List<NutriFacts>? nutri;
   ScanState({
-    this.value = const AsyncData(null),
+    this.nutriValue = const AsyncData([]),
+    this.nutri,
   });
 
-  bool get isLoading => value.isLoading;
+  bool get isLoading => nutriValue.isLoading;
 
   ScanState copyWith({
-    AsyncValue<String?>? value,
-    bool? isObscure,
+    AsyncValue<List<NutriFacts>>? nutriValue,
+    List<NutriFacts>? nutri,
   }) {
     return ScanState(
-      value: value ?? this.value,
+      nutriValue: nutriValue ?? this.nutriValue,
+      nutri: nutri ?? this.nutri,
     );
   }
 }

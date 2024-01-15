@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'network_exceptions.freezed.dart';
@@ -49,6 +50,108 @@ abstract class NetworkExceptions with _$NetworkExceptions {
     Map<String, dynamic> errors,
     String errorMessage,
   ) = UnProcessableEntity;
+
+  static NetworkExceptions getDioException(error) {
+    if (error is Exception) {
+      try {
+        late NetworkExceptions networkExceptions;
+        if (error is DioException) {
+          switch (error.type) {
+            case DioExceptionType.cancel:
+              networkExceptions = const NetworkExceptions.requestCancelled();
+              break;
+            case DioExceptionType.connectionTimeout:
+              networkExceptions = const NetworkExceptions.requestTimeout();
+              break;
+            case DioExceptionType.unknown:
+              networkExceptions =
+                  const NetworkExceptions.noInternetConnection();
+              break;
+            case DioExceptionType.receiveTimeout:
+              networkExceptions = const NetworkExceptions.sendTimeout();
+              break;
+            case DioExceptionType.badCertificate:
+              networkExceptions = const NetworkExceptions.unableToProcess();
+              break;
+            case DioExceptionType.connectionError:
+              networkExceptions =
+                  const NetworkExceptions.noInternetConnection();
+              break;
+            case DioExceptionType.badResponse:
+              switch (error.response?.statusCode) {
+                case 400:
+                  networkExceptions = NetworkExceptions.unauthorizedRequest(
+                    error.response?.data['body']['message'],
+                    true,
+                  );
+                  break;
+                case 401:
+                  networkExceptions = NetworkExceptions.unauthorizedRequest(
+                    error.response?.data['body']['message'],
+                    true,
+                  );
+                  break;
+                case 403:
+                  networkExceptions = NetworkExceptions.unauthorizedRequest(
+                    error.response?.data['body']['message'],
+                    true,
+                  );
+                  break;
+                case 404:
+                  networkExceptions = NetworkExceptions.notFound(
+                    error.response?.data['body']['message'],
+                  );
+                  break;
+                case 408:
+                  networkExceptions = const NetworkExceptions.requestTimeout();
+                  break;
+                case 409:
+                  networkExceptions = const NetworkExceptions.conflict();
+                  break;
+                case 422:
+                  networkExceptions = NetworkExceptions.unProcessableEntity(
+                    error.response?.data['data'],
+                    error.response?.data['body']['message'],
+                  );
+                  break;
+                case 500:
+                  networkExceptions = NetworkExceptions.internalServerError(
+                    error.response?.data['body']['message'],
+                  );
+                  break;
+                case 503:
+                  networkExceptions =
+                      const NetworkExceptions.serviceUnavailable();
+                  break;
+                default:
+                  networkExceptions = NetworkExceptions.defaultError(
+                    error.response?.data['body']['message'],
+                  );
+              }
+              break;
+            case DioExceptionType.sendTimeout:
+              networkExceptions = const NetworkExceptions.sendTimeout();
+              break;
+          }
+        } else if (error is SocketException) {
+          networkExceptions = const NetworkExceptions.noInternetConnection();
+        } else {
+          networkExceptions = const NetworkExceptions.unexpectedError();
+        }
+        return networkExceptions;
+      } on FormatException {
+        return const NetworkExceptions.formatException();
+      } catch (_) {
+        return const NetworkExceptions.unexpectedError();
+      }
+    } else {
+      if (error.toString().contains("is not a subtype of")) {
+        return const NetworkExceptions.unableToProcess();
+      } else {
+        return const NetworkExceptions.unexpectedError();
+      }
+    }
+  }
 
   static NetworkExceptions getFirebaseException(error) {
     if (error is Exception) {

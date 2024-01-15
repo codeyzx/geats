@@ -45,6 +45,9 @@ class $AssetsIconsGen {
   SvgGenImage get icAnalyzeDeactive =>
       const SvgGenImage('assets/icons/ic_analyze_deactive.svg');
 
+  /// File path: assets/icons/ic_compare.svg
+  SvgGenImage get icCompare => const SvgGenImage('assets/icons/ic_compare.svg');
+
   /// File path: assets/icons/ic_home_active.svg
   SvgGenImage get icHomeActive =>
       const SvgGenImage('assets/icons/ic_home_active.svg');
@@ -81,6 +84,7 @@ class $AssetsIconsGen {
         geatsLogo,
         icAnalyzeActive,
         icAnalyzeDeactive,
+        icCompare,
         icHomeActive,
         icHomeDeactive,
         icLauncher,
@@ -94,6 +98,36 @@ class $AssetsIconsGen {
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
+
+  /// File path: assets/images/bg1.jpeg
+  AssetGenImage get bg1 => const AssetGenImage('assets/images/bg1.jpeg');
+
+  /// File path: assets/images/bg10.jpeg
+  AssetGenImage get bg10 => const AssetGenImage('assets/images/bg10.jpeg');
+
+  /// File path: assets/images/bg2.jpeg
+  AssetGenImage get bg2 => const AssetGenImage('assets/images/bg2.jpeg');
+
+  /// File path: assets/images/bg3.jpeg
+  AssetGenImage get bg3 => const AssetGenImage('assets/images/bg3.jpeg');
+
+  /// File path: assets/images/bg4.jpeg
+  AssetGenImage get bg4 => const AssetGenImage('assets/images/bg4.jpeg');
+
+  /// File path: assets/images/bg5.jpeg
+  AssetGenImage get bg5 => const AssetGenImage('assets/images/bg5.jpeg');
+
+  /// File path: assets/images/bg6.jpeg
+  AssetGenImage get bg6 => const AssetGenImage('assets/images/bg6.jpeg');
+
+  /// File path: assets/images/bg7.jpeg
+  AssetGenImage get bg7 => const AssetGenImage('assets/images/bg7.jpeg');
+
+  /// File path: assets/images/bg8.jpeg
+  AssetGenImage get bg8 => const AssetGenImage('assets/images/bg8.jpeg');
+
+  /// File path: assets/images/bg9.jpeg
+  AssetGenImage get bg9 => const AssetGenImage('assets/images/bg9.jpeg');
 
   /// File path: assets/images/onboard_img_1.png
   AssetGenImage get onboardImg1 =>
@@ -112,8 +146,22 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/profile_default_img.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [onboardImg1, onboardImg2, onboardImg3, profileDefaultImg];
+  List<AssetGenImage> get values => [
+        bg1,
+        bg10,
+        bg2,
+        bg3,
+        bg4,
+        bg5,
+        bg6,
+        bg7,
+        bg8,
+        bg9,
+        onboardImg1,
+        onboardImg2,
+        onboardImg3,
+        profileDefaultImg
+      ];
 }
 
 class Assets {

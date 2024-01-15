@@ -39,7 +39,14 @@ class BotNavBarPage extends ConsumerWidget {
                 height: 28.h,
               ),
               onPressed: () {
-                context.pushNamed(Routes.scan.name);
+                context.pushNamed(
+                  Routes.scan.name,
+                  extra: const Extras(
+                    datas: {
+                      ExtrasKey.isCompare: false,
+                    },
+                  ),
+                );
               },
             ),
           ),

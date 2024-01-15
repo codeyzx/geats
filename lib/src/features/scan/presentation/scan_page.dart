@@ -7,7 +7,8 @@ import 'package:geats/src/features/scan/presentation/widget/scan_sheet.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ScanPage extends StatelessWidget {
-  const ScanPage({super.key});
+  final bool isCompare;
+  const ScanPage({super.key, required this.isCompare});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,8 @@ class ScanPage extends StatelessWidget {
                 Future.delayed(const Duration(seconds: 2), () {
                   showModalBottomSheet(
                     context: context,
-                    builder: (context) => ScanSheet(path: filePath),
+                    builder: (context) =>
+                        ScanSheet(path: filePath, isCompare: isCompare),
                     isScrollControlled: true,
                     backgroundColor: Colors.white,
                     shape: const RoundedRectangleBorder(

@@ -64,24 +64,23 @@ final goRouterProvider = Provider<GoRouter>(
         GoRoute(
           path: '/scan',
           name: Routes.scan.name,
-          builder: (context, state) => const ScanPage(),
+          builder: (context, state) {
+            final extras = state.extra as Extras;
+            final isCompare = extras.datas[ExtrasKey.isCompare] as bool;
+            return ScanPage(
+              isCompare: isCompare,
+            );
+          },
         ),
         GoRoute(
           path: '/nutri-facts',
           name: Routes.nutriFacts.name,
-          builder: (context, state) {
-            // final extras = state.extra as Extras;
-            // final barcode = extras.datas[ExtrasKey.barcode] as Barcode;
-            // return NutritionFactsPage(
-            //   barcode: barcode,
-            // );
-            return const NutritionFactsPage();
-          },
+          builder: (context, state) => const NutritionFactsPage(),
         ),
         GoRoute(
           path: '/recylce',
           name: Routes.recycle.name,
-          builder: (context, state) => const RecyclePage(), 
+          builder: (context, state) => const RecyclePage(),
         ),
         GoRoute(
           path: '/edit-profile-page',

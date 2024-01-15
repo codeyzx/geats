@@ -40,7 +40,7 @@ class SplashPage extends ConsumerWidget {
                 final message = NetworkExceptions.getErrorMessage(
                     error as NetworkExceptions);
                 if (message == "User not found") {
-                  context.goNamed(Routes.login.name);
+                  context.goNamed(Routes.botNavBar.name);
                 } else {
                   context.goNamed(Routes.botNavBar.name);
                   appSnackBar(context, Colors.red, message);

@@ -3,20 +3,23 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geats/src/constants/constants.dart';
 import 'package:geats/src/features/scan/presentation/scan_controller.dart';
-import 'package:geats/src/routes/app_routes.dart';
+import 'package:geats/src/routes/routes.dart';
 import 'package:go_router/go_router.dart';
-import 'package:logger/logger.dart';
+import 'package:quickalert/quickalert.dart';
 
 class ScanSheet extends ConsumerWidget {
   final String path;
+  final bool isCompare;
 
   const ScanSheet({
     required this.path,
+    required this.isCompare,
     super.key,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(scanControllerProvider);
     final controller = ref.watch(scanControllerProvider.notifier);
 
     return GestureDetector(
@@ -57,13 +60,32 @@ class ScanSheet extends ConsumerWidget {
                         onTap: () async {
                           final barcode = await controller.processImage(path);
                           if (barcode.isEmpty) {
-                            Logger().i('barcode is empty $barcode');
+                            Future.delayed(const Duration(seconds: 1), () {
+                              QuickAlert.show(
+                                  context: context,
+                                  type: QuickAlertType.error,
+                                  title: 'Barcode tidak ditemukan',
+                                  text: 'Silahkan coba lagi');
+                            });
                           } else {
-                            Logger().i('barcode is $barcode');
+                            if (!isCompare) controller.clearProduct();
+
+                            await controller.addProduct(
+                              barcode,
+                              state.nutri,
+                            );
+
+                            Future.delayed(const Duration(seconds: 1), () {
+                              context.pushNamed(
+                                Routes.nutriFacts.name,
+                                extra: const Extras(
+                                  datas: {
+                                    ExtrasKey.isCompare: false,
+                                  },
+                                ),
+                              );
+                            });
                           }
-                          Future.delayed(const Duration(seconds: 1), () {
-                            context.pushNamed(Routes.nutriFacts.name);
-                          });
                         },
                         child: Container(
                           height: 50,
@@ -90,10 +112,7 @@ class ScanSheet extends ConsumerWidget {
                           final result =
                               await controller.processImageToText(path);
                           if (result.isEmpty) {
-                            Logger().i('result is empty $result');
-                          } else {
-                            // Logger().i('result is $result');
-                          }
+                          } else {}
                           Future.delayed(const Duration(seconds: 1), () {
                             context.pushNamed(Routes.nutriFacts.name);
                           });

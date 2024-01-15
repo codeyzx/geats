@@ -399,9 +399,22 @@ class TypographyApp {
     fontWeight: FontWeight.w700,
     fontSize: 16.sp,
   );
+
   static TextStyle descScan = GoogleFonts.montserrat(
     color: ColorApp.black,
     fontWeight: FontWeight.w400,
     fontSize: 12.sp,
+  );
+
+  static TextStyle scanText = TextStyle(
+    color: ColorApp.black,
+    fontWeight: FontWeight.w700,
+    fontSize: 16.sp,
+  );
+
+  static TextStyle compareBtn = TextStyle(
+    color: ColorApp.grey,
+    fontWeight: FontWeight.w500,
+    fontSize: 14.sp,
   );
 }
