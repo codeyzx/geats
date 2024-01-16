@@ -1,71 +1,91 @@
-import 'dart:io';
+import 'dart:async';
 
 import 'package:camerawesome/camerawesome_plugin.dart';
-import 'package:camerawesome/pigeon.dart';
 import 'package:flutter/material.dart';
-import 'package:geats/src/features/scan/presentation/widget/scan_sheet.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:geats/src/features/scan/presentation/widget/barcode_preview_overlay.dart';
+import 'package:geats/src/shared/extensions/mlkit_utils.dart';
+import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
 
-class ScanPage extends StatelessWidget {
+class ScanPage extends StatefulWidget {
   final bool isCompare;
   const ScanPage({super.key, required this.isCompare});
 
   @override
+  State<ScanPage> createState() => _ScanPageState();
+}
+
+class _ScanPageState extends State<ScanPage> {
+  final _barcodeScanner = BarcodeScanner(formats: [BarcodeFormat.all]);
+  List<Barcode> _barcodes = [];
+  AnalysisImage? _image;
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Colors.white,
-        child: CameraAwesomeBuilder.awesome(
-          sensorConfig: SensorConfig.single(
-            sensor: Sensor.position(SensorPosition.back),
-            flashMode: FlashMode.auto,
-            aspectRatio: CameraAspectRatios.ratio_16_9,
-            zoom: 0.0,
+      extendBodyBehindAppBar: true,
+      body: CameraAwesomeBuilder.awesome(
+        saveConfig: SaveConfig.photoAndVideo(
+          initialCaptureMode: CaptureMode.photo,
+        ),
+        sensorConfig: SensorConfig.single(
+          flashMode: FlashMode.auto,
+          aspectRatio: CameraAspectRatios.ratio_16_9,
+        ),
+        previewFit: CameraPreviewFit.fitWidth,
+        previewDecoratorBuilder: (state, preview) {
+          return BarcodePreviewOverlay(
+            state: state,
+            barcodes: _barcodes,
+            analysisImage: _image,
+            preview: preview,
+          );
+        },
+        topActionsBuilder: (state) {
+          return AwesomeTopActions(
+            state: state,
+            children: [
+              AwesomeFlashButton(state: state),
+              if (state is PhotoCameraState)
+                AwesomeAspectRatioButton(state: state),
+            ],
+          );
+        },
+        middleContentBuilder: (state) {
+          return const SizedBox.shrink();
+        },
+        bottomActionsBuilder: (state) {
+          return const Padding(
+            padding: EdgeInsets.only(bottom: 20),
+            child: Text(
+              "Scan the barcodes",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 30,
+              ),
+            ),
+          );
+        },
+        onImageForAnalysis: (img) => _processImageBarcode(img),
+        imageAnalysisConfig: AnalysisConfig(
+          androidOptions: const AndroidAnalysisOptions.nv21(
+            width: 256,
           ),
-          enablePhysicalButton: true,
-          previewFit: CameraPreviewFit.contain,
-          availableFilters: awesomePresetFiltersList,
-          saveConfig: SaveConfig.photo(
-            mirrorFrontCamera: true,
-            exifPreferences: ExifPreferences(saveGPSLocation: true),
-            pathBuilder: (sensors) async {
-              final Directory extDir = await getTemporaryDirectory();
-              final testDir = await Directory(
-                extDir.path,
-              ).create(recursive: true);
-
-              if (sensors.length == 1) {
-                final String filePath =
-                    '${testDir.path}/${DateTime.now().millisecondsSinceEpoch}.jpg';
-                Future.delayed(const Duration(seconds: 2), () {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (context) =>
-                        ScanSheet(path: filePath, isCompare: isCompare),
-                    isScrollControlled: true,
-                    backgroundColor: Colors.white,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(10),
-                      ),
-                    ),
-                  );
-                });
-                return SingleCaptureRequest(filePath, sensors.first);
-              } else {
-                // Separate pictures taken with front and back camera
-                return MultipleCaptureRequest(
-                  {
-                    for (final sensor in sensors)
-                      sensor:
-                          '${testDir.path}/${sensor.position == SensorPosition.front ? 'front_' : "back_"}${DateTime.now().millisecondsSinceEpoch}.jpg',
-                  },
-                );
-              }
-            },
-          ),
+          maxFramesPerSecond: 3,
         ),
       ),
     );
+  }
+
+  Future _processImageBarcode(AnalysisImage img) async {
+    try {
+      var recognizedBarCodes =
+          await _barcodeScanner.processImage(img.toInputImage());
+      setState(() {
+        _barcodes = recognizedBarCodes;
+        _image = img;
+      });
+    } catch (error) {
+      debugPrint("...sending image resulted error $error");
+    }
   }
 }

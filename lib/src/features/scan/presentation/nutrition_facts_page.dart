@@ -7,7 +7,6 @@ import 'package:geats/src/constants/constants.dart';
 import 'package:geats/src/features/common/presentation/common_controller.dart';
 import 'package:geats/src/features/scan/presentation/scan_controller.dart';
 import 'package:geats/src/routes/routes.dart';
-import 'package:geats/src/shared/extensions/extensions.dart';
 import 'package:go_router/go_router.dart';
 
 class NutritionFactsPage extends ConsumerWidget {
@@ -66,10 +65,36 @@ class NutritionFactsPage extends ConsumerWidget {
         ),
         body: AsyncValueWidget(
           value: state.nutriValue,
-          loading: (loadingWidget) {
-            return Container(
-              margin: EdgeInsets.only(top: context.screenHeightPercentage(0.3)),
-              child: loadingWidget,
+          error: (_) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Data not found',
+                    style: TypographyApp.scanText,
+                  ),
+                  Gap.h16,
+                  TextButton(
+                    onPressed: () {
+                      context.pushNamed(
+                        Routes.scan.name,
+                        extra: const Extras(
+                          datas: {
+                            ExtrasKey.isCompare: true,
+                          },
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'Back',
+                      style: TypographyApp.scanText.copyWith(
+                        color: ColorApp.primary,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             );
           },
           data: (data) => SingleChildScrollView(
@@ -110,21 +135,26 @@ class NutritionFactsPage extends ConsumerWidget {
                                 'Calories',
                                 style: TypographyApp.scanText,
                               ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    '${product.calories.toInt()}',
-                                    style: TypographyApp.scanText.copyWith(
-                                      fontSize: 24.sp,
+                              product.calories == 0
+                                  ? Text('Not Found',
+                                      style: TypographyApp.scanText)
+                                  : Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          '${product.calories.toInt()}',
+                                          style:
+                                              TypographyApp.scanText.copyWith(
+                                            fontSize: 24.sp,
+                                          ),
+                                        ),
+                                        Text(
+                                          'kcal',
+                                          style: TypographyApp.scanText,
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  Text(
-                                    'kcal',
-                                    style: TypographyApp.scanText,
-                                  ),
-                                ],
-                              ),
                             ],
                           ),
                           const LineWidget(),
@@ -136,21 +166,26 @@ class NutritionFactsPage extends ConsumerWidget {
                                 'Total Fat',
                                 style: TypographyApp.scanText,
                               ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    '${product.fat}',
-                                    style: TypographyApp.scanText.copyWith(
-                                      fontSize: 24.sp,
+                              product.fat == 0
+                                  ? Text('Not Found',
+                                      style: TypographyApp.scanText)
+                                  : Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          '${product.fat}',
+                                          style:
+                                              TypographyApp.scanText.copyWith(
+                                            fontSize: 24.sp,
+                                          ),
+                                        ),
+                                        Text(
+                                          'g',
+                                          style: TypographyApp.scanText,
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  Text(
-                                    'g',
-                                    style: TypographyApp.scanText,
-                                  ),
-                                ],
-                              ),
                             ],
                           ),
                           Row(
@@ -160,21 +195,26 @@ class NutritionFactsPage extends ConsumerWidget {
                                 'Protein',
                                 style: TypographyApp.scanText,
                               ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    '${product.proteins}',
-                                    style: TypographyApp.scanText.copyWith(
-                                      fontSize: 24.sp,
+                              product.proteins == 0
+                                  ? Text('Not Found',
+                                      style: TypographyApp.scanText)
+                                  : Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          '${product.proteins}',
+                                          style:
+                                              TypographyApp.scanText.copyWith(
+                                            fontSize: 24.sp,
+                                          ),
+                                        ),
+                                        Text(
+                                          'g',
+                                          style: TypographyApp.scanText,
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  Text(
-                                    'g',
-                                    style: TypographyApp.scanText,
-                                  ),
-                                ],
-                              ),
                             ],
                           ),
                           Row(
@@ -184,21 +224,26 @@ class NutritionFactsPage extends ConsumerWidget {
                                 'Carbs',
                                 style: TypographyApp.scanText,
                               ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    '${product.carbs}',
-                                    style: TypographyApp.scanText.copyWith(
-                                      fontSize: 24.sp,
+                              product.carbs == 0
+                                  ? Text('Not Found',
+                                      style: TypographyApp.scanText)
+                                  : Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          '${product.carbs}',
+                                          style:
+                                              TypographyApp.scanText.copyWith(
+                                            fontSize: 24.sp,
+                                          ),
+                                        ),
+                                        Text(
+                                          'g',
+                                          style: TypographyApp.scanText,
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  Text(
-                                    'g',
-                                    style: TypographyApp.scanText,
-                                  ),
-                                ],
-                              ),
                             ],
                           ),
                           const LineWidget(),
