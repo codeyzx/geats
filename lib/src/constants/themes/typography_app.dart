@@ -417,4 +417,82 @@ class TypographyApp {
     fontWeight: FontWeight.w500,
     fontSize: 14.sp,
   );
+
+  //analyze
+  static TextStyle analyzeTitle = GoogleFonts.poppins(
+    color: HexColor('#120D26'),
+    fontWeight: FontWeight.w500,
+    fontSize: 16.sp,
+  );
+  static TextStyle analyzeDateTitle = GoogleFonts.poppins(
+    color: HexColor('#031B29'),
+    fontWeight: FontWeight.w500,
+    fontSize: 18.sp,
+  );
+  static TextStyle analyzeDateNum = GoogleFonts.poppins(
+    color: HexColor('#031B29'),
+    fontWeight: FontWeight.w700,
+    fontSize: 14.sp,
+  );
+  static TextStyle analyzeDateMonth = GoogleFonts.poppins(
+    color: HexColor('#031B29'),
+    fontWeight: FontWeight.w400,
+    fontSize: 16.sp,
+  );
+  static TextStyle analyzeDateNumActive = GoogleFonts.poppins(
+    color: HexColor('#F1F5F5'),
+    fontWeight: FontWeight.w700,
+    fontSize: 14.sp,
+  );
+  static TextStyle analyzeDateMonthActive = GoogleFonts.poppins(
+    color: HexColor('#F1F5F5'),
+    fontWeight: FontWeight.w400,
+    fontSize: 16.sp,
+  );
+  static TextStyle analyzeConsumed = GoogleFonts.poppins(
+    color: HexColor('#F1F5F5'),
+    fontWeight: FontWeight.w500,
+    fontSize: 14.sp,
+  );
+  static TextStyle analyzeConsumedCurrent = GoogleFonts.poppins(
+    color: HexColor('#F8FAE5'),
+    fontWeight: FontWeight.w700,
+    fontSize: 14.sp,
+  );
+  static TextStyle analyzeConsumedMax = GoogleFonts.poppins(
+    color: HexColor('#F1F5F5').withOpacity(0.69),
+    fontWeight: FontWeight.w400,
+    fontSize: 14.sp,
+  );
+  static TextStyle analyzeNutritionTitle = GoogleFonts.poppins(
+    color: HexColor('#F1F5F5'),
+    fontWeight: FontWeight.w500,
+    fontSize: 14.sp,
+  );
+  static TextStyle analyzeAddBtn = GoogleFonts.poppins(
+    color: HexColor('#F1F5F5'),
+    fontWeight: FontWeight.w500,
+    fontSize: 16.sp,
+    letterSpacing: 1
+  );
+  static TextStyle analyzeMealName = GoogleFonts.poppins(
+      color: HexColor('#120D26'),
+      fontWeight: FontWeight.w400,
+      fontSize: 16.sp,
+  );
+  static TextStyle analyzeMealQty = GoogleFonts.poppins(
+    color: HexColor('#A9A9A9'),
+    fontWeight: FontWeight.w400,
+    fontSize: 14.sp,
+  );
+  static TextStyle analyzeMealNum = GoogleFonts.poppins(
+    color: HexColor('#120D26'),
+    fontWeight: FontWeight.w600,
+    fontSize: 16.sp,
+  );
+  static TextStyle analyzeMealNumSub = GoogleFonts.poppins(
+    color: HexColor('#A9A9A9'),
+    fontWeight: FontWeight.w400,
+    fontSize: 16.sp,
+  );
 }
