@@ -29,7 +29,7 @@ class CommonRepository {
           .get();
       List<DailyMeals> dailyMeals = [];
       for (var element in resultDailyMeals.docs) {
-        dailyMeals.add(DailyMeals.fromJson(element.data()));
+        dailyMeals.add(DailyMeals.fromJson(element.data(), element.id));
       }
 
       user.dailyMeals = dailyMeals;

@@ -6,6 +6,7 @@ class Food {
   final double carbs;
   final double sugars;
   final String image;
+  final int qty;
 
   Food({
     required this.name,
@@ -15,6 +16,7 @@ class Food {
     required this.carbs,
     required this.sugars,
     required this.image,
+    required this.qty,
   });
 
   factory Food.fromJson(Map<String, dynamic> json) {
@@ -26,6 +28,7 @@ class Food {
       carbs: json['carbs'] == null ? 0 : json['carbs'].toDouble(),
       sugars: json['sugars'] == null ? 0 : json['sugars'].toDouble(),
       image: json['image'] ?? '',
+      qty: json['qty'] ?? 0,
     );
   }
 
@@ -38,6 +41,7 @@ class Food {
       carbs: json['carbs'] == null ? 0 : json['carbs'].toDouble(),
       sugars: json['sugars'] == null ? 0 : json['sugars'].toDouble(),
       image: json['image'] ?? '',
+      qty: json['qty'] ?? 0,
     );
   }
 
@@ -50,6 +54,7 @@ class Food {
       'carbs': carbs,
       'sugars': sugars,
       'image': image,
+      'qty': qty,
     };
   }
 
@@ -61,6 +66,7 @@ class Food {
     double? carbs,
     double? sugars,
     String? image,
+    int? qty,
   }) {
     return Food(
       name: name ?? this.name,
@@ -70,6 +76,7 @@ class Food {
       carbs: carbs ?? this.carbs,
       sugars: sugars ?? this.sugars,
       image: image ?? this.image,
+      qty: qty ?? this.qty,
     );
   }
 }

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:geats/gen/fonts.gen.dart';
 import 'package:geats/src/constants/constants.dart';
-import 'package:geats/src/routes/app_routes.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class RecyclePage extends ConsumerWidget {
@@ -129,7 +126,7 @@ class RecyclePage extends ConsumerWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.add_rounded, color: Colors.white,),
+                      const Icon(Icons.add_rounded, color: Colors.white,),
                       SizedBox(width: 5.w,),
                       Text('RECYCLE NOW', style: TypographyApp.analyzeAddBtn,),
                     ],
@@ -193,7 +190,7 @@ class RecyclePage extends ConsumerWidget {
               ),
               ListView(
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 children: [
                   Column(
                     children: [
@@ -373,7 +370,7 @@ class RecyclePage extends ConsumerWidget {
                   ),
                 ],
               ),
-              Container(
+              SizedBox(
                 height: 160.h,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
@@ -388,7 +385,7 @@ class RecyclePage extends ConsumerWidget {
                           boxShadow: [
                             BoxShadow(
                               color: HexColor('#505588').withOpacity(0.06),
-                              offset: Offset(0, 8),
+                              offset: const Offset(0, 8),
                               blurRadius: 30,
                             ),
                           ]
@@ -402,7 +399,7 @@ class RecyclePage extends ConsumerWidget {
                               padding: EdgeInsets.only(top: 7.h, left: 7.w, right: 128.w, bottom: 57.h),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r),
-                                image: DecorationImage(
+                                image: const DecorationImage(
                                   fit: BoxFit.fill,
                                     image: NetworkImage('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/7effe0c9-16a3-4e45-b4df-73fd25b34b87/dg80etl-dbb6b229-a693-443c-906c-71a1d8ce5add.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzdlZmZlMGM5LTE2YTMtNGU0NS1iNGRmLTczZmQyNWIzNGI4N1wvZGc4MGV0bC1kYmI2YjIyOS1hNjkzLTQ0M2MtOTA2Yy03MWExZDhjZTVhZGQuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.VASt7CgMX_QFTqknwi4S7vA0GCZg3vc0fapN_89g5Ws'))
                               ),
@@ -441,7 +438,7 @@ class RecyclePage extends ConsumerWidget {
                             boxShadow: [
                               BoxShadow(
                                 color: HexColor('#505588').withOpacity(0.06),
-                                offset: Offset(0, 8),
+                                offset: const Offset(0, 8),
                                 blurRadius: 30,
                               ),
                             ]
@@ -455,7 +452,7 @@ class RecyclePage extends ConsumerWidget {
                               padding: EdgeInsets.only(top: 7.h, left: 7.w, right: 128.w, bottom: 57.h),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10.r),
-                                  image: DecorationImage(
+                                  image: const DecorationImage(
                                       fit: BoxFit.fill,
                                       image: NetworkImage('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/7effe0c9-16a3-4e45-b4df-73fd25b34b87/dg80etl-dbb6b229-a693-443c-906c-71a1d8ce5add.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzdlZmZlMGM5LTE2YTMtNGU0NS1iNGRmLTczZmQyNWIzNGI4N1wvZGc4MGV0bC1kYmI2YjIyOS1hNjkzLTQ0M2MtOTA2Yy03MWExZDhjZTVhZGQuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.VASt7CgMX_QFTqknwi4S7vA0GCZg3vc0fapN_89g5Ws'))
                               ),
@@ -494,7 +491,7 @@ class RecyclePage extends ConsumerWidget {
                             boxShadow: [
                               BoxShadow(
                                 color: HexColor('#505588').withOpacity(0.06),
-                                offset: Offset(0, 8),
+                                offset: const Offset(0, 8),
                                 blurRadius: 30,
                               ),
                             ]
@@ -508,7 +505,7 @@ class RecyclePage extends ConsumerWidget {
                               padding: EdgeInsets.only(top: 7.h, left: 7.w, right: 128.w, bottom: 57.h),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10.r),
-                                  image: DecorationImage(
+                                  image: const DecorationImage(
                                       fit: BoxFit.fill,
                                       image: NetworkImage('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/7effe0c9-16a3-4e45-b4df-73fd25b34b87/dg80etl-dbb6b229-a693-443c-906c-71a1d8ce5add.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzdlZmZlMGM5LTE2YTMtNGU0NS1iNGRmLTczZmQyNWIzNGI4N1wvZGc4MGV0bC1kYmI2YjIyOS1hNjkzLTQ0M2MtOTA2Yy03MWExZDhjZTVhZGQuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.VASt7CgMX_QFTqknwi4S7vA0GCZg3vc0fapN_89g5Ws'))
                               ),

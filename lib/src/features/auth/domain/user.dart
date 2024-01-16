@@ -66,6 +66,7 @@ class User {
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
+    Map<String, dynamic> dailyMealsMap = json['dailyMeals'] ?? {};
     return User(
       id: json['id'] ?? '',
       name: json['name'] ?? '',
@@ -94,11 +95,9 @@ class User {
       sugarsGoal: json['sugarsGoal'] ?? 0,
       dailyMeals: json['dailyMeals'] == null
           ? []
-          : List<DailyMeals>.from(
-              json['dailyMeals'].map(
-                (x) => DailyMeals.fromJson(x),
-              ),
-            ),
+          : dailyMealsMap.entries
+              .map((entry) => DailyMeals.fromJson(entry.value, entry.key))
+              .toList(),
     );
   }
 

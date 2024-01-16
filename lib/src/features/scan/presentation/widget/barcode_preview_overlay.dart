@@ -165,7 +165,6 @@ class _BarcodePreviewOverlayState extends ConsumerState<BarcodePreviewOverlay> {
           // with the area of the barcode. If the intersection is greater than
           // a certain percentage, then the barcode is in the scan area.
           // _barcodeInArea = true;
-          // TODO: HERE
           // if (!isCompare) controller.clearProduct();
 
           // stop scanning
