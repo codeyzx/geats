@@ -527,11 +527,34 @@ class _AnalyzePageState extends ConsumerState<AnalyzePage> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
-                                      width: 50.w,
-                                      height: 50.h,
-                                      color: Colors.black,
-                                    ),
+                                    e.image.isNotEmpty
+                                        ? Container(
+                                            width: 50.w,
+                                            height: 50.w,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.r),
+                                              image: DecorationImage(
+                                                image: NetworkImage(e.image),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          )
+                                        : Container(
+                                            width: 50.w,
+                                            height: 50.w,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.r),
+                                              color: HexColor('#F1F5F5'),
+                                            ),
+                                            child: Center(
+                                              child: Icon(
+                                                Icons.fastfood_rounded,
+                                                color: HexColor('#85B1B4'),
+                                              ),
+                                            ),
+                                          ),
                                     Column(
                                       children: [
                                         SizedBox(
