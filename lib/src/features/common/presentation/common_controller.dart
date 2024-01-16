@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geats/src/features/analyze/presentation/analyze_page.dart';
 import 'package:geats/src/features/recycle/presentation/recycle_page.dart';
+import 'package:geats/src/shared/extensions/extensions.dart';
 import 'package:go_router/go_router.dart';
 import 'package:geats/src/features/common/application/common_service.dart';
 import 'package:geats/src/features/profile/presentation/profile_page.dart';
@@ -19,6 +20,10 @@ class CommonController extends StateNotifier<CommonState> {
     getProfile();
     setPage(0);
   }
+
+  final weightController = TextEditingController();
+  final heightController = TextEditingController();
+
   Future<void> getProfile() async {
     state = state.copyWith(
       userValue: const AsyncLoading(),
@@ -64,6 +69,32 @@ class CommonController extends StateNotifier<CommonState> {
     state = state.copyWith(
       isLastPage: value,
     );
+  }
+
+  void setGender(String? gender) {
+    state = state.copyWith(
+      gender: gender,
+    );
+  }
+
+  void setAge(String? age) {
+    state = state.copyWith(
+      age: age,
+    );
+  }
+
+  String? validateWeight(String? value) {
+    if (value.isNullOrEmpty()) {
+      return "Cannot be empty";
+    }
+    return null;
+  }
+
+  String? validateHeight(String? value) {
+    if (value.isNullOrEmpty()) {
+      return "Cannot be empty";
+    } 
+    return null;
   }
 
   Widget _getScreen(index) {

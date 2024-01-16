@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geats/src/features/common/presentation/question/question_page.dart';
 import 'package:geats/src/features/recycle/presentation/recycle_page.dart';
 import 'package:geats/src/features/scan/presentation/nutrition_facts_page.dart';
 import 'package:geats/src/features/scan/presentation/scan_page.dart';
@@ -18,6 +19,7 @@ enum Routes {
   onboard,
   login,
   register,
+  question,
   botNavBar,
   scan,
   nutriFacts,
@@ -55,6 +57,11 @@ final goRouterProvider = Provider<GoRouter>(
           path: '/register',
           name: Routes.register.name,
           builder: (context, state) => const RegisterPage(),
+        ),
+        GoRoute(
+          path: '/question',
+          name: Routes.question.name,
+          builder: (context, state) => const QuestionPage(),
         ),
         GoRoute(
           path: '/botnavbar',
