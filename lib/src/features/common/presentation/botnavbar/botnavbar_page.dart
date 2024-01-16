@@ -66,14 +66,14 @@ class BotNavBarPage extends ConsumerWidget {
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: !state.isExploreActive
+              icon: !state.isAnalyzeActive
                   ? Assets.icons.icAnalyzeDeactive.svg()
                   : Assets.icons.icAnalyzeActive.svg(),
               label: '',
             ),
             BottomNavigationBarItem(icon: SizedBox(width: 40.w), label: ''),
             BottomNavigationBarItem(
-              icon: !state.isEventsActive
+              icon: !state.isRecycleActive
                   ? Assets.icons.icRecycleDeactive.svg()
                   : Assets.icons.icRecycleActive.svg(),
               label: '',

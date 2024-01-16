@@ -6,8 +6,8 @@ import 'package:geats/src/features/home/presentation/home_page.dart';
 
 class CommonState {
   final bool isHomeActive;
-  final bool isExploreActive;
-  final bool isEventsActive;
+  final bool isAnalyzeActive;
+  final bool isRecycleActive;
   final bool isProfileActive;
   final bool isLastPage;
   final int currentIndex;
@@ -17,8 +17,8 @@ class CommonState {
 
   CommonState({
     this.isHomeActive = true,
-    this.isExploreActive = false,
-    this.isEventsActive = false,
+    this.isAnalyzeActive = false,
+    this.isRecycleActive = false,
     this.isProfileActive = false,
     this.isLastPage = false,
     this.currentIndex = 0,
@@ -29,8 +29,8 @@ class CommonState {
 
   CommonState copyWith({
     bool? isHomeActive,
-    bool? isExploreActive,
-    bool? isEventsActive,
+    bool? isAnalyzeActive,
+    bool? isRecycleActive,
     bool? isProfileActive,
     bool? isLastPage,
     int? currentIndex,
@@ -40,8 +40,8 @@ class CommonState {
   }) {
     return CommonState(
       isHomeActive: isHomeActive ?? this.isHomeActive,
-      isExploreActive: isExploreActive ?? this.isExploreActive,
-      isEventsActive: isEventsActive ?? this.isEventsActive,
+      isAnalyzeActive: isAnalyzeActive ?? this.isAnalyzeActive,
+      isRecycleActive: isRecycleActive ?? this.isRecycleActive,
       isProfileActive: isProfileActive ?? this.isProfileActive,
       isLastPage: isLastPage ?? this.isLastPage,
       currentIndex: currentIndex ?? this.currentIndex,

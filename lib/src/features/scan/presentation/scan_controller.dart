@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geats/src/features/scan/application/scan_service.dart';
 import 'package:geats/src/features/scan/domain/nutrifacts.dart';
 import 'package:geats/src/features/scan/presentation/scan_state.dart';
-import 'package:logger/logger.dart';
 
 class ScanController extends StateNotifier<ScanState> {
   final ScanService _scanService;
@@ -23,7 +22,6 @@ class ScanController extends StateNotifier<ScanState> {
         );
       },
       failure: (error, stackTrace) {
-        Logger().e('error: $error');
         state = state.copyWith(
           nutriValue: AsyncError(error, stackTrace),
         );

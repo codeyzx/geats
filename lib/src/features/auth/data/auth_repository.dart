@@ -47,6 +47,18 @@ class AuthRepository {
         name: requestRegister.name,
         email: requestRegister.email,
         profileUrl: '',
+        gender: Gender.male,
+        coins: 0,
+        height: 0,
+        weight: 0,
+        age: 0,
+        activity: Activity.rare,
+        weightGoal: WeightGoal.maintain,
+        caloriesGoal: 0,
+        fatGoal: 0,
+        proteinsGoal: 0,
+        carbsGoal: 0,
+        sugarsGoal: 0,
       );
 
       await userDb.doc(user.id).set(user);

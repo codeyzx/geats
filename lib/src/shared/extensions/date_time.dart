@@ -12,6 +12,7 @@ extension XDateTime on DateTime {
   String get time => DateFormat('Hm').format(this);
   String get hourWithMinute => DateFormat('HH:mm').format(this);
   String get age => (DateTime.now().year - year).toString();
+  String get dateWithDayMonthYear => DateFormat('EEE, d MMM yyyy').format(this);
   String get historyDate {
     final DateTime now = DateTime.now();
     final DateTime yesterday = DateTime(now.year, now.month, now.day - 1);

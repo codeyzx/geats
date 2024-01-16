@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:geats/gen/fonts.gen.dart';
 import 'package:geats/src/constants/constants.dart';
-import 'package:geats/src/routes/app_routes.dart';
-import 'package:go_router/go_router.dart';
+import 'package:geats/src/features/profile/presentation/profile_controller.dart';
+import 'package:geats/src/shared/extensions/extensions.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class AnalyzePage extends StatefulWidget {
+class AnalyzePage extends ConsumerStatefulWidget {
   const AnalyzePage({super.key});
 
   @override
-  State<AnalyzePage> createState() => _AnalyzePageState();
+  ConsumerState<AnalyzePage> createState() => _AnalyzePageState();
 }
 
-class _AnalyzePageState extends State<AnalyzePage> {
+class _AnalyzePageState extends ConsumerState<AnalyzePage> {
+  @override
+  void initState() {
+    safeRebuild(() {});
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final userState = ref.watch(userControllerProvider);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -36,7 +42,7 @@ class _AnalyzePageState extends State<AnalyzePage> {
                   style: TypographyApp.analyzeTitle,
                 ),
                 Text(
-                  'Wed, 9 Jan 2024',
+                  DateTime.now().dateWithDayMonthYear,
                   style: TypographyApp.analyzeDateTitle,
                 )
               ],
@@ -45,7 +51,7 @@ class _AnalyzePageState extends State<AnalyzePage> {
           SizedBox(
             height: 10.h,
           ),
-          Container(
+          SizedBox(
             height: 75.h,
             child: ListView(
               scrollDirection: Axis.horizontal,
@@ -540,15 +546,24 @@ class _AnalyzePageState extends State<AnalyzePage> {
                       elevation: 4,
                       backgroundColor: HexColor('#353535'),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(13.r), // Atur border radius
+                        borderRadius:
+                            BorderRadius.circular(13.r), // Atur border radius
                       ),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.add_rounded, color: Colors.white,),
-                        SizedBox(width: 5.w,),
-                        Text('ADD MEAL', style: TypographyApp.analyzeAddBtn,),
+                        const Icon(
+                          Icons.add_rounded,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 5.w,
+                        ),
+                        Text(
+                          'ADD MEAL',
+                          style: TypographyApp.analyzeAddBtn,
+                        ),
                       ],
                     ),
                   ),
@@ -560,10 +575,9 @@ class _AnalyzePageState extends State<AnalyzePage> {
                   'Recent Meal',
                   style: TypographyApp.analyzeDateTitle,
                 ),
-
                 ListView(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   children: [
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -579,20 +593,34 @@ class _AnalyzePageState extends State<AnalyzePage> {
                             SizedBox(
                               width: 271.w,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text('Banana', style: TypographyApp.analyzeMealName,),
-                                      Text('1 Qty', style: TypographyApp.analyzeMealQty,),
+                                      Text(
+                                        'Banana',
+                                        style: TypographyApp.analyzeMealName,
+                                      ),
+                                      Text(
+                                        '1 Qty',
+                                        style: TypographyApp.analyzeMealQty,
+                                      ),
                                     ],
                                   ),
                                   Row(
                                     children: [
-                                      Text('90', style: TypographyApp.analyzeMealNum,),
-                                      Text('cal', style: TypographyApp.analyzeMealNumSub,),
+                                      Text(
+                                        '90',
+                                        style: TypographyApp.analyzeMealNum,
+                                      ),
+                                      Text(
+                                        'cal',
+                                        style: TypographyApp.analyzeMealNumSub,
+                                      ),
                                     ],
                                   ),
                                 ],
@@ -624,20 +652,34 @@ class _AnalyzePageState extends State<AnalyzePage> {
                             SizedBox(
                               width: 271.w,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text('Banana', style: TypographyApp.analyzeMealName,),
-                                      Text('1 Qty', style: TypographyApp.analyzeMealQty,),
+                                      Text(
+                                        'Banana',
+                                        style: TypographyApp.analyzeMealName,
+                                      ),
+                                      Text(
+                                        '1 Qty',
+                                        style: TypographyApp.analyzeMealQty,
+                                      ),
                                     ],
                                   ),
                                   Row(
                                     children: [
-                                      Text('90', style: TypographyApp.analyzeMealNum,),
-                                      Text('cal', style: TypographyApp.analyzeMealNumSub,),
+                                      Text(
+                                        '90',
+                                        style: TypographyApp.analyzeMealNum,
+                                      ),
+                                      Text(
+                                        'cal',
+                                        style: TypographyApp.analyzeMealNumSub,
+                                      ),
                                     ],
                                   ),
                                 ],
@@ -669,20 +711,34 @@ class _AnalyzePageState extends State<AnalyzePage> {
                             SizedBox(
                               width: 271.w,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text('Banana', style: TypographyApp.analyzeMealName,),
-                                      Text('1 Qty', style: TypographyApp.analyzeMealQty,),
+                                      Text(
+                                        'Banana',
+                                        style: TypographyApp.analyzeMealName,
+                                      ),
+                                      Text(
+                                        '1 Qty',
+                                        style: TypographyApp.analyzeMealQty,
+                                      ),
                                     ],
                                   ),
                                   Row(
                                     children: [
-                                      Text('90', style: TypographyApp.analyzeMealNum,),
-                                      Text('cal', style: TypographyApp.analyzeMealNumSub,),
+                                      Text(
+                                        '90',
+                                        style: TypographyApp.analyzeMealNum,
+                                      ),
+                                      Text(
+                                        'cal',
+                                        style: TypographyApp.analyzeMealNumSub,
+                                      ),
                                     ],
                                   ),
                                 ],

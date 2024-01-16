@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geats/src/features/analyze/presentation/analyze_page.dart';
 import 'package:geats/src/features/recycle/presentation/recycle_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:geats/src/features/common/application/common_service.dart';
-// import 'package:geats/src/features/history/presentation/history_page.dart';
-// import 'package:geats/src/features/inventory/presentation/inventory_page.dart';
 import 'package:geats/src/features/profile/presentation/profile_page.dart';
-// import 'package:geats/src/features/home/presentation/home_page.dart';
 import 'package:geats/src/features/common/presentation/common_state.dart';
 import 'package:geats/src/features/home/presentation/home_page.dart';
 
@@ -56,8 +54,8 @@ class CommonController extends StateNotifier<CommonState> {
       currentIndex: index,
       currentScreen: _getScreen(index),
       isHomeActive: index == 0,
-      isExploreActive: index == 1,
-      isEventsActive: index == 3,
+      isAnalyzeActive: index == 1,
+      isRecycleActive: index == 3,
       isProfileActive: index == 4,
     );
   }
@@ -73,7 +71,7 @@ class CommonController extends StateNotifier<CommonState> {
       case 0:
         return const HomePage();
       case 1:
-        return const ProfilePage();
+        return const AnalyzePage();
       case 3:
         return const RecyclePage();
       case 4:
