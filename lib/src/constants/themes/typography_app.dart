@@ -495,4 +495,51 @@ class TypographyApp {
     fontWeight: FontWeight.w400,
     fontSize: 16.sp,
   );
+
+  //recycle title
+  static TextStyle recycleTitle = GoogleFonts.poppins(
+    color: HexColor('#120D26'),
+    fontWeight: FontWeight.w500,
+    fontSize: 16.sp,
+  );
+  static TextStyle recycleCardTitle = GoogleFonts.poppins(
+    color: HexColor('#D3FFEC'),
+    fontWeight: FontWeight.w500,
+    fontSize: 16.sp,
+  );
+  static TextStyle recycleCardSubTitle = GoogleFonts.poppins(
+    color: HexColor('#E0E0E0'),
+    fontWeight: FontWeight.w300,
+    fontSize: 12.sp,
+  );
+  static TextStyle recycleCardValue = GoogleFonts.poppins(
+    color: HexColor('#F8FAE5'),
+    fontWeight: FontWeight.w500,
+    fontSize: 20.sp,
+  );
+  static TextStyle recycleCardValueSub = GoogleFonts.poppins(
+    color: HexColor('#E6E6E6'),
+    fontWeight: FontWeight.w500,
+    fontSize: 16.sp,
+  );
+  static TextStyle recycleCardSeeAll = GoogleFonts.poppins(
+    color: HexColor('#747688'),
+    fontWeight: FontWeight.w500,
+    fontSize: 14.sp,
+  );
+  static TextStyle recycleSaleValue = GoogleFonts.poppins(
+    color: HexColor('#F0635A'),
+    fontWeight: FontWeight.w700,
+    fontSize: 13.sp,
+  );
+  static TextStyle recycleSaleValueSub = GoogleFonts.poppins(
+    color: HexColor('#F0635A'),
+    fontWeight: FontWeight.w500,
+    fontSize: 8.sp,
+  );
+  static TextStyle recycleSaleTitle = GoogleFonts.poppins(
+    color: HexColor('#000000'),
+    fontWeight: FontWeight.w500,
+    fontSize: 13.sp,
+  );
 }
