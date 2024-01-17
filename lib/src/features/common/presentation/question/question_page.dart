@@ -93,7 +93,7 @@ class QuestionPage extends ConsumerWidget {
         bottomSheet: state.isLastPage
             ? Container(
                 padding: EdgeInsets.only(bottom: 52.h, left: 34.w, right: 34.w),
-                height: 170.h,
+                height: 140.h,
                 color: Colors.white,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -167,7 +167,7 @@ class QuestionPage extends ConsumerWidget {
               )
             : Container(
                 padding: EdgeInsets.only(bottom: 52.h, left: 34.w, right: 34.w),
-                height: 170.h,
+                height: 140.h,
                 color: Colors.white,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

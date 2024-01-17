@@ -219,7 +219,7 @@ class _AnalyzePageState extends ConsumerState<AnalyzePage> {
                               Container(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 12.w, vertical: 16.h),
-                                width: 163.w,
+                                width: 169.w,
                                 decoration: BoxDecoration(
                                   color: HexColor('#85B1B4'),
                                   borderRadius: BorderRadius.circular(15.r),
@@ -280,7 +280,7 @@ class _AnalyzePageState extends ConsumerState<AnalyzePage> {
                               Container(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 12.w, vertical: 16.h),
-                                width: 163.w,
+                                width: 169.w,
                                 decoration: BoxDecoration(
                                   color: HexColor('#85B1B4'),
                                   borderRadius: BorderRadius.circular(15.r),
@@ -346,7 +346,7 @@ class _AnalyzePageState extends ConsumerState<AnalyzePage> {
                               Container(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 12.w, vertical: 16.h),
-                                width: 163.w,
+                                width: 169.w,
                                 decoration: BoxDecoration(
                                   color: HexColor('#85B1B4'),
                                   borderRadius: BorderRadius.circular(15.r),
@@ -406,7 +406,7 @@ class _AnalyzePageState extends ConsumerState<AnalyzePage> {
                               Container(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 12.w, vertical: 16.h),
-                                width: 163.w,
+                                width: 169.w,
                                 decoration: BoxDecoration(
                                   color: HexColor('#85B1B4'),
                                   borderRadius: BorderRadius.circular(15.r),
