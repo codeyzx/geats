@@ -40,6 +40,15 @@ class CommonRepository {
     }
   }
 
+  Future<Result<String?>> updateDiet(Map<String, dynamic> user) async {
+    try {
+      await userDb.doc(user['id']).update(user);
+      return const Result.success('Success');
+    } catch (e, st) {
+      return Result.failure(NetworkExceptions.getFirebaseException(e), st);
+    }
+  }
+
   Future<Result<String>> updateProfile(RequestUser user) async {
     try {
       await requestUserDb.doc(user.id).update(user.toJson());

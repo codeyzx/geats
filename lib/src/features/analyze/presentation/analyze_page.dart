@@ -265,9 +265,6 @@ class _AnalyzePageState extends ConsumerState<AnalyzePage> {
                                               style: TypographyApp
                                                   .analyzeConsumedCurrent,
                                             ),
-                                            SizedBox(
-                                              width: 2.h,
-                                            ),
                                             Text(
                                               '/ ${data.proteinsGoal}gr',
                                               style: TypographyApp
@@ -327,9 +324,6 @@ class _AnalyzePageState extends ConsumerState<AnalyzePage> {
                                               dailyMeals.totalCarbs.toString(),
                                               style: TypographyApp
                                                   .analyzeConsumedCurrent,
-                                            ),
-                                            SizedBox(
-                                              width: 2.h,
                                             ),
                                             Text(
                                               '/ ${data.carbsGoal}gr',
@@ -397,9 +391,6 @@ class _AnalyzePageState extends ConsumerState<AnalyzePage> {
                                               style: TypographyApp
                                                   .analyzeConsumedCurrent,
                                             ),
-                                            SizedBox(
-                                              width: 2.h,
-                                            ),
                                             Text(
                                               '/ ${data.fatGoal}gr',
                                               style: TypographyApp
@@ -459,9 +450,6 @@ class _AnalyzePageState extends ConsumerState<AnalyzePage> {
                                               dailyMeals.totalSugars.toString(),
                                               style: TypographyApp
                                                   .analyzeConsumedCurrent,
-                                            ),
-                                            SizedBox(
-                                              width: 2.h,
                                             ),
                                             Text(
                                               '/ ${data.sugarsGoal}gr',

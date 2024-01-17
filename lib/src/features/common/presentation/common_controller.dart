@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geats/src/features/analyze/presentation/analyze_page.dart';
+import 'package:geats/src/features/auth/domain/user.dart';
 import 'package:geats/src/features/recycle/presentation/recycle_page.dart';
 import 'package:geats/src/shared/extensions/extensions.dart';
 import 'package:go_router/go_router.dart';
@@ -34,6 +35,25 @@ class CommonController extends StateNotifier<CommonState> {
         state = state.copyWith(
           user: data,
           userValue: AsyncData(data),
+        );
+      },
+      failure: (error, stackTrace) {
+        state = state.copyWith(
+          userValue: AsyncError(error, stackTrace),
+        );
+      },
+    );
+  }
+
+  Future<void> updateDiet(Map<String, dynamic> user) async {
+    state = state.copyWith(
+      isGetLoading: const AsyncLoading(),
+    );
+    final result = await _commonService.updateDiet(user);
+    result.when(
+      success: (data) {
+        state = state.copyWith(
+          isGetLoading: const AsyncData(true),
         );
       },
       failure: (error, stackTrace) {
@@ -95,6 +115,108 @@ class CommonController extends StateNotifier<CommonState> {
     state = state.copyWith(
       weightGoal: weightValue,
     );
+  }
+
+  Map<String, dynamic> calculateDiet({
+    required double weight,
+    required double height,
+    required int age,
+    required String gender,
+    required WeightGoal weightGoal,
+    required Activity activity,
+  }) {
+    double bmr = (10 * weight) +
+        (6.25 * height) -
+        (5 * age) +
+        (gender == 'Male' ? 5 : -161);
+
+    // Activity level multiplier
+    double activityLevelMultiplier = 1;
+    switch (activity) {
+      case Activity.rare:
+        activityLevelMultiplier = 1.2;
+        break;
+      case Activity.medium:
+        activityLevelMultiplier = 1.375;
+        break;
+      case Activity.active:
+        activityLevelMultiplier = 1.55;
+        break;
+    }
+
+    // Calculate Daily Calories
+    double dailyCalories = bmr * activityLevelMultiplier;
+
+    // Adjust calories based on goal
+    switch (weightGoal) {
+      case WeightGoal.gain:
+        dailyCalories += 500;
+        break;
+      case WeightGoal.lose:
+        dailyCalories -= 500;
+        break;
+      case WeightGoal.maintain:
+        break;
+    }
+
+    // Macronutrient percentages
+    double proteinPercentage = 0.4;
+
+    double fatsPercentage = 0.0;
+    switch (weightGoal) {
+      case WeightGoal.gain:
+        fatsPercentage = 0.3;
+        break;
+      case WeightGoal.lose:
+        fatsPercentage = 0.4;
+        break;
+      case WeightGoal.maintain:
+        fatsPercentage = 0.4;
+        break;
+    }
+
+    double carbsPercentage = 0.0;
+    switch (weightGoal) {
+      case WeightGoal.gain:
+        carbsPercentage = 0.3;
+        break;
+      case WeightGoal.lose:
+        carbsPercentage = 0.2;
+        break;
+      case WeightGoal.maintain:
+        carbsPercentage = 0.3;
+        break;
+    }
+
+    double sugarPercentage = 0.1;
+
+    // Calculate grams of each macronutrient
+    double protein = (proteinPercentage * dailyCalories / 4);
+    double fats = (fatsPercentage * dailyCalories / 9);
+    double carbs = (carbsPercentage * dailyCalories / 4);
+    double sugar = (sugarPercentage * dailyCalories / 4);
+
+    // take the ceiling of each value
+    dailyCalories = dailyCalories.ceilToDouble();
+    protein = protein.ceilToDouble();
+    fats = fats.ceilToDouble();
+    carbs = carbs.ceilToDouble();
+    sugar = sugar.ceilToDouble();
+
+    // Display results
+    return {
+      'caloriesGoal': dailyCalories.toInt(),
+      'proteinsGoal': protein.toInt(),
+      'fatGoal': fats.toInt(),
+      'carbsGoal': carbs.toInt(),
+      'sugarsGoal': sugar.toInt(),
+      'gender': gender,
+      'age': age,
+      'weight': weight,
+      'height': height,
+      'activity': activity.name,
+      'weightGoal': weightGoal.name,
+    };
   }
 
   String? validateWeight(String? value) {

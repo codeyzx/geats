@@ -44,6 +44,7 @@ class User {
   final int proteinsGoal;
   final int carbsGoal;
   final int sugarsGoal;
+  final bool isSuccessRegister;
   List<DailyMeals> dailyMeals;
 
   User({
@@ -63,6 +64,7 @@ class User {
     required this.proteinsGoal,
     required this.carbsGoal,
     required this.sugarsGoal,
+    required this.isSuccessRegister,
     this.dailyMeals = const [],
   });
 
@@ -101,6 +103,7 @@ class User {
         proteinsGoal: json['proteinsGoal'] ?? 0,
         carbsGoal: json['carbsGoal'] ?? 0,
         sugarsGoal: json['sugarsGoal'] ?? 0,
+        isSuccessRegister: json['isSuccessRegister'] ?? false,
         dailyMeals: json['dailyMeals'] == null ? [] : dailyMeals);
   }
 
@@ -122,6 +125,7 @@ class User {
       'proteinsGoal': proteinsGoal,
       'carbsGoal': carbsGoal,
       'sugarsGoal': sugarsGoal,
+      'isSuccessRegister': isSuccessRegister,
       'dailyMeals': dailyMeals,
     };
   }
@@ -143,6 +147,7 @@ class User {
     int? proteinsGoal,
     int? carbsGoal,
     int? sugarsGoal,
+    bool? isSuccessRegister,
     List<DailyMeals>? dailyMeals,
   }) {
     return User(
@@ -162,6 +167,7 @@ class User {
       sugarsGoal: sugarsGoal ?? this.sugarsGoal,
       weight: weight ?? this.weight,
       weightGoal: weightGoal ?? this.weightGoal,
+      isSuccessRegister: isSuccessRegister ?? this.isSuccessRegister,
       dailyMeals: dailyMeals ?? this.dailyMeals,
     );
   }
