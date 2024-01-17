@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geats/src/features/domain.dart';
 import 'package:geats/src/services/services.dart';
+import 'package:logger/logger.dart';
 
 class AuthRepository {
   final userDb = FirebaseFirestore.instance.collection('user').withConverter(
@@ -42,29 +43,21 @@ class AuthRepository {
           .signInWithEmailAndPassword(email: emailAddress, password: password);
 
       final credUser = credential.user;
-      final user = User(
-        id: credUser!.uid,
-        name: requestRegister.name,
-        email: requestRegister.email,
-        profileUrl: '',
-        gender: Gender.male,
-        coins: 0,
-        height: 0,
-        weight: 0,
-        age: 0,
-        activity: Activity.rare,
-        weightGoal: WeightGoal.maintain,
-        caloriesGoal: 0,
-        fatGoal: 0,
-        proteinsGoal: 0,
-        carbsGoal: 0,
-        sugarsGoal: 0,
-      );
+      Map<String, dynamic> user = {
+        'id': credUser!.uid,
+        'name': requestRegister.name,
+        'email': requestRegister.email,
+        'isSuccessRegister': false,
+      };
 
-      await userDb.doc(user.id).set(user);
+      await FirebaseFirestore.instance
+          .collection('user')
+          .doc(credUser.uid)
+          .set(user);
 
       return const Result.success(true);
     } catch (e, stackTrace) {
+      Logger().e('Error $e');
       return Result.failure(
           NetworkExceptions.getFirebaseException(e), stackTrace);
     }

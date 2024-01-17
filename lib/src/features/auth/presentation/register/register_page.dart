@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geats/src/features/common/presentation/common_controller.dart';
 import 'package:go_router/go_router.dart';
 import 'package:geats/src/common_widgets/common_widgets.dart';
 import 'package:geats/src/constants/constants.dart';
@@ -18,8 +17,7 @@ class RegisterPage extends ConsumerWidget {
         state.registerValue.whenOrNull(
           data: (message) {
             if (message != null) {
-              context.goNamed(Routes.botNavBar.name);
-              ref.read(commonControllerProvider.notifier).getProfile();
+              context.goNamed(Routes.question.name);
             }
           },
           error: (error, stackTrace) {

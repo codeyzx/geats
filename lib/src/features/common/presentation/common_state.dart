@@ -19,6 +19,7 @@ class CommonState {
   final Activity? activity;
   final WeightGoal? weightGoal;
   final List<Map<String, String>> ageList;
+  final AsyncValue<bool?> isGetLoading;
 
   CommonState({
     this.isHomeActive = true,
@@ -34,6 +35,7 @@ class CommonState {
     this.age = "10",
     this.activity = Activity.rare,
     this.weightGoal = WeightGoal.lose,
+    this.isGetLoading = const AsyncLoading(),
   }) : ageList = List.generate(91, (index) => index + 10)
             .map((e) => {'value': e.toString(), 'text': e.toString()})
             .toList();
@@ -52,6 +54,7 @@ class CommonState {
     String? age,
     Activity? activity,
     WeightGoal? weightGoal,
+    AsyncValue<bool?>? isGetLoading,
   }) {
     return CommonState(
       isHomeActive: isHomeActive ?? this.isHomeActive,
@@ -67,6 +70,7 @@ class CommonState {
       age: age ?? this.age,
       activity: activity ?? this.activity,
       weightGoal: weightGoal ?? this.weightGoal,
+      isGetLoading: isGetLoading ?? this.isGetLoading,
     );
   }
 }

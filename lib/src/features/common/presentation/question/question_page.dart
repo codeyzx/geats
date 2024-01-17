@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,6 +7,8 @@ import 'package:geats/src/constants/constants.dart';
 import 'package:geats/src/features/auth/domain/user.dart';
 import 'package:geats/src/features/common/presentation/common_controller.dart';
 import 'package:geats/src/features/common/presentation/question/widget/widget.dart';
+import 'package:geats/src/routes/app_routes.dart';
+import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class QuestionPage extends ConsumerWidget {
@@ -120,16 +123,37 @@ class QuestionPage extends ConsumerWidget {
                           backgroundColor:
                               MaterialStateProperty.all(ColorApp.primary),
                         ),
-                        onPressed: () {
-                          controller.nextPage(
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.easeInOut,
-                          );
+                        onPressed: () async {
                           if (controllerState.heightController.text.isEmpty ||
                               controllerState.weightController.text.isEmpty) {
                             hideSnackBar(context);
                             appSnackBar(
                                 context, Colors.red, 'Field do not empty');
+                          } else {
+                            final resultCalculate =
+                                controllerState.calculateDiet(
+                              gender: state.gender,
+                              weight: double.parse(
+                                  controllerState.weightController.text),
+                              height: double.parse(
+                                  controllerState.heightController.text),
+                              age: int.tryParse(state.age) ?? 0,
+                              weightGoal: state.weightGoal!,
+                              activity: state.activity!,
+                            );
+                            resultCalculate['id'] = FirebaseAuth
+                                .instance.currentUser!.uid
+                                .toString();
+
+                            resultCalculate['isSuccessRegister'] = true;
+
+                            await controllerState.updateDiet(resultCalculate);
+
+                            await controllerState.getProfile();
+
+                            Future.delayed(const Duration(seconds: 1)).then(
+                                (value) =>
+                                    context.goNamed(Routes.botNavBar.name));
                           }
                         },
                         child: Text(

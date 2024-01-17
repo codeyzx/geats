@@ -31,7 +31,11 @@ class SplashPage extends ConsumerWidget {
             state.userValue.whenOrNull(
               data: (data) {
                 if (data != null) {
-                  context.goNamed(Routes.botNavBar.name);
+                  if (data.isSuccessRegister) {
+                    context.goNamed(Routes.botNavBar.name);
+                  } else {
+                    context.goNamed(Routes.question.name);
+                  }
                 } else {
                   context.goNamed(Routes.login.name);
                 }

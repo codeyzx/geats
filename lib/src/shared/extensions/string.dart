@@ -34,6 +34,17 @@ extension XString on String {
     }
   }
 
+  Gender get getGender {
+    switch (this) {
+      case 'Male':
+        return Gender.male;
+      case 'Female':
+        return Gender.female;
+      default:
+        return Gender.male;
+    }
+  }
+
   Activity get getActivity {
     switch (this) {
       case 'Little or no exercise':
