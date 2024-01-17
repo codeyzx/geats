@@ -37,6 +37,7 @@ dependencies:
   firebase_core: ^2.24.2
   flutter:
     sdk: flutter
+  flutter_easyloading: ^3.0.5
   flutter_riverpod: ^2.4.9
   flutter_screenutil: ^5.9.0
   flutter_svg: ^2.0.9

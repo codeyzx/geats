@@ -1,5 +1,6 @@
-import 'package:geats/src/features/auth/domain/food.dart';
+import 'package:geats/src/features/analyze/domain/meal.dart';
 import 'package:geats/src/shared/extensions/extensions.dart';
+import 'package:logger/logger.dart';
 
 class DailyMeals {
   final DateTime date;
@@ -8,7 +9,7 @@ class DailyMeals {
   final int totalProteins;
   final int totalCarbs;
   final int totalSugars;
-  final List<Food> meals;
+  final List<Meal> meals;
 
   DailyMeals({
     required this.date,
@@ -21,19 +22,19 @@ class DailyMeals {
   });
 
   factory DailyMeals.fromJson(Map<String, dynamic> json, String date) {
-    Map<String, dynamic> foodMap = json['meals'] ?? {};
+    final foodMap = json['meals'] == null ? [] : json['meals'] as List;
+    List<Meal> meals = foodMap.map((e) => Meal.fromJson(e)).toList();
     return DailyMeals(
       date: DateTime.parse(date),
-      totalCalories: json['totalCalories'] ?? 0,
-      totalFat: json['totalFat'] ?? 0,
-      totalProteins: json['totalProteins'] ?? 0,
-      totalCarbs: json['totalCarbs'] ?? 0,
-      totalSugars: json['totalSugars'] ?? 0,
-      meals: json['meals'] == null
-          ? []
-          : foodMap.entries
-              .map((entry) => Food.fromMap(entry.key, entry.value))
-              .toList(),
+      totalCalories:
+          json['totalCalories'] == null ? 0 : json['totalCalories'].toInt(),
+      totalFat: json['totalFat'] == null ? 0 : json['totalFat'].toInt(),
+      totalProteins:
+          json['totalProteins'] == null ? 0 : json['totalProteins'].toInt(),
+      totalCarbs: json['totalCarbs'] == null ? 0 : json['totalCarbs'].toInt(),
+      totalSugars:
+          json['totalSugars'] == null ? 0 : json['totalSugars'].toInt(),
+      meals: meals,
     );
   }
 
@@ -55,7 +56,7 @@ class DailyMeals {
     int? totalProteins,
     int? totalCarbs,
     int? totalSugars,
-    List<Food>? meals,
+    List<Meal>? meals,
   }) {
     return DailyMeals(
       date: date,

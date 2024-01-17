@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geats/src/features/analyze/presentation/add_meal_page.dart';
 import 'package:geats/src/features/common/presentation/question/question_page.dart';
 import 'package:geats/src/features/recycle/presentation/recycle_page.dart';
 import 'package:geats/src/features/scan/presentation/nutrition_facts_page.dart';
@@ -25,6 +26,7 @@ enum Routes {
   nutriFacts,
   recycle,
   editProfile,
+  addMeal,
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -83,6 +85,11 @@ final goRouterProvider = Provider<GoRouter>(
           path: '/nutri-facts',
           name: Routes.nutriFacts.name,
           builder: (context, state) => const NutritionFactsPage(),
+        ),
+        GoRoute(
+          path: '/add-meal',
+          name: Routes.addMeal.name,
+          builder: (context, state) => const AddMealPage(),
         ),
         GoRoute(
           path: '/recylce',

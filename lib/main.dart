@@ -88,6 +88,11 @@ class CustomErrorWidget extends StatelessWidget {
 
 final _appTheme = ThemeData(
   useMaterial3: true,
+  colorScheme: ColorScheme.light(
+    primary: ColorApp.primary,
+    secondary: ColorApp.secondary,
+    error: ColorApp.red,
+  ),
   progressIndicatorTheme: ProgressIndicatorThemeData(
     circularTrackColor: ColorApp.white,
     color: ColorApp.secondary,

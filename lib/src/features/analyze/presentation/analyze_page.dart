@@ -7,7 +7,9 @@ import 'package:geats/src/features/analyze/presentation/analyze_controller.dart'
 import 'package:geats/src/features/analyze/presentation/analyze_state.dart';
 import 'package:geats/src/features/common/presentation/common_controller.dart';
 import 'package:geats/src/features/common/presentation/common_state.dart';
+import 'package:geats/src/routes/app_routes.dart';
 import 'package:geats/src/shared/extensions/extensions.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class AnalyzePage extends ConsumerStatefulWidget {
@@ -264,7 +266,7 @@ class _AnalyzePageState extends ConsumerState<AnalyzePage> {
                                                   .analyzeConsumedCurrent,
                                             ),
                                             SizedBox(
-                                              width: 4.h,
+                                              width: 2.h,
                                             ),
                                             Text(
                                               '/ ${data.proteinsGoal}gr',
@@ -327,7 +329,7 @@ class _AnalyzePageState extends ConsumerState<AnalyzePage> {
                                                   .analyzeConsumedCurrent,
                                             ),
                                             SizedBox(
-                                              width: 4.h,
+                                              width: 2.h,
                                             ),
                                             Text(
                                               '/ ${data.carbsGoal}gr',
@@ -396,7 +398,7 @@ class _AnalyzePageState extends ConsumerState<AnalyzePage> {
                                                   .analyzeConsumedCurrent,
                                             ),
                                             SizedBox(
-                                              width: 4.h,
+                                              width: 2.h,
                                             ),
                                             Text(
                                               '/ ${data.fatGoal}gr',
@@ -459,7 +461,7 @@ class _AnalyzePageState extends ConsumerState<AnalyzePage> {
                                                   .analyzeConsumedCurrent,
                                             ),
                                             SizedBox(
-                                              width: 4.h,
+                                              width: 2.h,
                                             ),
                                             Text(
                                               '/ ${data.sugarsGoal}gr',
@@ -482,33 +484,60 @@ class _AnalyzePageState extends ConsumerState<AnalyzePage> {
                     SizedBox(
                       width: 345.w,
                       height: 55.h,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          elevation: 4,
-                          backgroundColor: HexColor('#353535'),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                13.r), // Atur border radius
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.add_rounded,
-                              color: Colors.white,
+                      child: analyzeState.selectedDate?.toYyyyMMDd ==
+                              DateTime.now().toYyyyMMDd
+                          ? ElevatedButton(
+                              onPressed: () {
+                                context.pushNamed(Routes.addMeal.name);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                elevation: 4,
+                                backgroundColor: HexColor('#353535'),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      13.r), // Atur border radius
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    Icons.add_rounded,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(
+                                    width: 5.w,
+                                  ),
+                                  Text(
+                                    'ADD MEAL',
+                                    style: TypographyApp.analyzeAddBtn,
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Container(
+                              width: 345.w,
+                              height: 55.h,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(13.r),
+                                  color: ColorApp.secondary.withOpacity(0.6)),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    Icons.add_rounded,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(
+                                    width: 5.w,
+                                  ),
+                                  Text(
+                                    'ADD MEAL',
+                                    style: TypographyApp.analyzeAddBtn,
+                                  ),
+                                ],
+                              ),
                             ),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            Text(
-                              'ADD MEAL',
-                              style: TypographyApp.analyzeAddBtn,
-                            ),
-                          ],
-                        ),
-                      ),
                     ),
                     Gap.h16,
                     Text(

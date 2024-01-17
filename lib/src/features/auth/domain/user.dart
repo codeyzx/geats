@@ -1,4 +1,6 @@
-import 'package:geats/src/features/auth/domain/daily_meals.dart';
+import 'package:geats/src/features/analyze/domain/daily_meals.dart';
+import 'package:geats/src/shared/extensions/date_time.dart';
+import 'package:logger/logger.dart';
 
 enum Gender {
   male('Male'),
@@ -66,39 +68,41 @@ class User {
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
-    Map<String, dynamic> dailyMealsMap = json['dailyMeals'] ?? {};
+    final dailyMealsMap =
+        json['dailyMeals'] == null ? [] : json['dailyMeals'] as List;
+    List<DailyMeals> dailyMeals = dailyMealsMap
+        .map((e) {
+          return DailyMeals.fromJson(e, DateTime.now().toYyyyMMDd);
+        })
+        .toList()
+        .cast<DailyMeals>();
     return User(
-      id: json['id'] ?? '',
-      name: json['name'] ?? '',
-      email: json['email'] ?? '',
-      profileUrl: json['profileUrl'] ?? '',
-      gender: Gender.values.firstWhere(
-        (e) => e.value == json['gender'],
-        orElse: () => Gender.male,
-      ),
-      coins: json['coins'] ?? 0,
-      height: json['height'] == null ? 0 : json['height'].toDouble(),
-      weight: json['weight'] == null ? 0 : json['weight'].toDouble(),
-      age: json['age'] ?? 0,
-      activity: Activity.values.firstWhere(
-        (e) => e.value == json['activity'],
-        orElse: () => Activity.rare,
-      ),
-      weightGoal: WeightGoal.values.firstWhere(
-        (e) => e.value == json['weightGoal'],
-        orElse: () => WeightGoal.maintain,
-      ),
-      caloriesGoal: json['caloriesGoal'] ?? 0,
-      fatGoal: json['fatGoal'] ?? 0,
-      proteinsGoal: json['proteinsGoal'] ?? 0,
-      carbsGoal: json['carbsGoal'] ?? 0,
-      sugarsGoal: json['sugarsGoal'] ?? 0,
-      dailyMeals: json['dailyMeals'] == null
-          ? []
-          : dailyMealsMap.entries
-              .map((entry) => DailyMeals.fromJson(entry.value, entry.key))
-              .toList(),
-    );
+        id: json['id'] ?? '',
+        name: json['name'] ?? '',
+        email: json['email'] ?? '',
+        profileUrl: json['profileUrl'] ?? '',
+        gender: Gender.values.firstWhere(
+          (e) => e.value == json['gender'],
+          orElse: () => Gender.male,
+        ),
+        coins: json['coins'] ?? 0,
+        height: json['height'] == null ? 0 : json['height'].toDouble(),
+        weight: json['weight'] == null ? 0 : json['weight'].toDouble(),
+        age: json['age'] ?? 0,
+        activity: Activity.values.firstWhere(
+          (e) => e.value == json['activity'],
+          orElse: () => Activity.rare,
+        ),
+        weightGoal: WeightGoal.values.firstWhere(
+          (e) => e.value == json['weightGoal'],
+          orElse: () => WeightGoal.maintain,
+        ),
+        caloriesGoal: json['caloriesGoal'] ?? 0,
+        fatGoal: json['fatGoal'] ?? 0,
+        proteinsGoal: json['proteinsGoal'] ?? 0,
+        carbsGoal: json['carbsGoal'] ?? 0,
+        sugarsGoal: json['sugarsGoal'] ?? 0,
+        dailyMeals: json['dailyMeals'] == null ? [] : dailyMeals);
   }
 
   Map<String, dynamic> toJson() {

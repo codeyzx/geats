@@ -93,7 +93,7 @@ class CommonController extends StateNotifier<CommonState> {
   String? validateHeight(String? value) {
     if (value.isNullOrEmpty()) {
       return "Cannot be empty";
-    } 
+    }
     return null;
   }
 

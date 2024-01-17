@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geats/src/features/analyze/presentation/analyze_controller.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:geats/src/common_widgets/async_value/async_value_widget.dart';
@@ -18,6 +19,8 @@ class ProfilePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(commonControllerProvider);
     final controller = ref.read(commonControllerProvider.notifier);
+    final analyzeController = ref.read(analyzeControllerProvider.notifier);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: AsyncValueWidget(
@@ -191,7 +194,9 @@ class ProfilePage extends ConsumerWidget {
                   height: 18.h,
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () async {
+                    await analyzeController.add();
+                  },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -218,7 +223,7 @@ class ProfilePage extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Ubah Password",
+                              "Add Meals",
                               style: TypographyApp.profileItem,
                             ),
                             Icon(

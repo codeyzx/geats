@@ -1,4 +1,5 @@
-class Food {
+class Meals {
+  final String? id;
   final String name;
   final int calories;
   final double fat;
@@ -6,9 +7,9 @@ class Food {
   final double carbs;
   final double sugars;
   final String image;
-  final int qty;
 
-  Food({
+  Meals({
+    this.id,
     required this.name,
     required this.calories,
     required this.fat,
@@ -16,11 +17,11 @@ class Food {
     required this.carbs,
     required this.sugars,
     required this.image,
-    required this.qty,
   });
 
-  factory Food.fromJson(Map<String, dynamic> json) {
-    return Food(
+  factory Meals.fromJson(Map<String, dynamic> json) {
+    return Meals(
+      id: json['id'] ?? '',
       name: json['name'] ?? '',
       calories: json['calories'] ?? 0,
       fat: json['fat'] == null ? 0 : json['fat'].toDouble(),
@@ -28,25 +29,12 @@ class Food {
       carbs: json['carbs'] == null ? 0 : json['carbs'].toDouble(),
       sugars: json['sugars'] == null ? 0 : json['sugars'].toDouble(),
       image: json['image'] ?? '',
-      qty: json['qty'] ?? 0,
-    );
-  }
-
-  factory Food.fromMap(String foodName, Map<String, dynamic> json) {
-    return Food(
-      name: foodName,
-      calories: json['calories'] ?? 0,
-      fat: json['fat'] == null ? 0 : json['fat'].toDouble(),
-      proteins: json['proteins'] == null ? 0 : json['proteins'].toDouble(),
-      carbs: json['carbs'] == null ? 0 : json['carbs'].toDouble(),
-      sugars: json['sugars'] == null ? 0 : json['sugars'].toDouble(),
-      image: json['image'] ?? '',
-      qty: json['qty'] ?? 0,
     );
   }
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
+      'id': id,
       'name': name,
       'calories': calories,
       'fat': fat,
@@ -54,11 +42,11 @@ class Food {
       'carbs': carbs,
       'sugars': sugars,
       'image': image,
-      'qty': qty,
     };
   }
 
-  Food copyWith({
+  Meals copyWith({
+    String? id,
     String? name,
     int? calories,
     double? fat,
@@ -66,9 +54,9 @@ class Food {
     double? carbs,
     double? sugars,
     String? image,
-    int? qty,
   }) {
-    return Food(
+    return Meals(
+      id: id ?? this.id,
       name: name ?? this.name,
       calories: calories ?? this.calories,
       fat: fat ?? this.fat,
@@ -76,7 +64,6 @@ class Food {
       carbs: carbs ?? this.carbs,
       sugars: sugars ?? this.sugars,
       image: image ?? this.image,
-      qty: qty ?? this.qty,
     );
   }
 }
