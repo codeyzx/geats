@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geats/src/features/analyze/presentation/analyze_page.dart';
+import 'package:geats/src/features/auth/domain/request_user.dart';
 import 'package:geats/src/features/auth/domain/user.dart';
 import 'package:geats/src/features/recycle/presentation/recycle_page.dart';
 import 'package:geats/src/shared/extensions/extensions.dart';
@@ -24,6 +25,8 @@ class CommonController extends StateNotifier<CommonState> {
 
   final weightController = TextEditingController();
   final heightController = TextEditingController();
+  final nameController = TextEditingController();
+  final ageController = TextEditingController();
 
   Future<void> getProfile() async {
     state = state.copyWith(
@@ -40,6 +43,41 @@ class CommonController extends StateNotifier<CommonState> {
       failure: (error, stackTrace) {
         state = state.copyWith(
           userValue: AsyncError(error, stackTrace),
+        );
+      },
+    );
+  }
+
+  void setData(User user) {
+    nameController.text = user.name;
+    heightController.text = user.height.toString();
+    weightController.text = user.weight.toString();
+    ageController.text = user.age.toString();
+    state.activity = user.activity;
+    state.weightGoal = user.weightGoal;
+
+    state = state.copyWith(
+      user: user,
+      userValue: AsyncData(user),
+    );
+  }
+
+  Future<void> updateProfile(RequestUser user) async {
+    state = state.copyWith(
+      isGetLoading: const AsyncLoading(),
+    );
+
+    final result = await _commonService.updateProfile(user);
+
+    result.when(
+      success: (data) {
+        state = state.copyWith(
+          isGetLoading: const AsyncData(true),
+        );
+      },
+      failure: (error, stackTrace) {
+        state = state.copyWith(
+          isGetLoading: AsyncError(error, stackTrace),
         );
       },
     );
@@ -247,10 +285,19 @@ class CommonController extends StateNotifier<CommonState> {
         return const HomePage();
     }
   }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    heightController.dispose();
+    weightController.dispose();
+    ageController.dispose();
+    super.dispose();
+  }
 }
 
 final commonControllerProvider =
-    StateNotifierProvider<CommonController, CommonState>((ref) {
+    StateNotifierProvider.autoDispose<CommonController, CommonState>((ref) {
   final commonService = ref.read(commonServiceProvider);
   return CommonController(commonService);
 });

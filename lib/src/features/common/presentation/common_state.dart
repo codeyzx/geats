@@ -16,8 +16,8 @@ class CommonState {
   final String gender;
   final String age;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final Activity? activity;
-  final WeightGoal? weightGoal;
+  Activity? activity;
+  WeightGoal? weightGoal;
   final List<Map<String, String>> ageList;
   final AsyncValue<bool?> isGetLoading;
 
@@ -35,7 +35,7 @@ class CommonState {
     this.age = "10",
     this.activity = Activity.rare,
     this.weightGoal = WeightGoal.lose,
-    this.isGetLoading = const AsyncLoading(),
+    this.isGetLoading = const AsyncData(false),
   }) : ageList = List.generate(91, (index) => index + 10)
             .map((e) => {'value': e.toString(), 'text': e.toString()})
             .toList();

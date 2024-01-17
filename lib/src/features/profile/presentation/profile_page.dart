@@ -19,7 +19,6 @@ class ProfilePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(commonControllerProvider);
     final controller = ref.read(commonControllerProvider.notifier);
-    final analyzeController = ref.read(analyzeControllerProvider.notifier);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -134,7 +133,7 @@ class ProfilePage extends ConsumerWidget {
                   height: 18.h,
                 ),
                 Text(
-                  "Akunmu",
+                  "Your Account",
                   style: TypographyApp.profileItemTitle,
                 ),
                 SizedBox(
@@ -177,7 +176,7 @@ class ProfilePage extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Edit Profil",
+                              "Edit Profile",
                               style: TypographyApp.profileItem,
                             ),
                             Icon(
@@ -195,7 +194,7 @@ class ProfilePage extends ConsumerWidget {
                 ),
                 InkWell(
                   onTap: () async {
-                    await analyzeController.add();
+                    // await analyzeController.add();
                   },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -223,60 +222,7 @@ class ProfilePage extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Add Meals",
-                              style: TypographyApp.profileItem,
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              color: HexColor('#606060'),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 18.h,
-                ),
-                InkWell(
-                  onTap: () {
-                    // context.pushNamed(
-                    //   Routes.schedule.name,
-                    //   extra: Extras(
-                    //     datas: {
-                    //       ExtrasKey.schedule: state.user!.scheduleList,
-                    //     },
-                    //   ),
-                    // );
-                  },
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.calendar_month_rounded,
-                        color: HexColor('#5F6C7B'),
-                      ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      Container(
-                        width: 0.8.sw,
-                        padding: EdgeInsets.only(bottom: 16.h),
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(
-                              width: 1,
-                              color: HexColor('#E5E5E5'),
-                            ),
-                          ),
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Lihat Jadwal",
+                              "Change Password",
                               style: TypographyApp.profileItem,
                             ),
                             Icon(
@@ -293,7 +239,7 @@ class ProfilePage extends ConsumerWidget {
                   height: 24.h,
                 ),
                 Text(
-                  "Bantuan",
+                  "Support",
                   style: TypographyApp.profileItemTitle,
                 ),
                 SizedBox(
@@ -327,7 +273,7 @@ class ProfilePage extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Kontak",
+                              "Contact",
                               style: TypographyApp.profileItem,
                             ),
                             Icon(
@@ -371,7 +317,7 @@ class ProfilePage extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Laporkan Masalah",
+                              "Report a Problem",
                               style: TypographyApp.profileItem,
                             ),
                             Icon(
@@ -388,7 +334,7 @@ class ProfilePage extends ConsumerWidget {
                   height: 24.h,
                 ),
                 Text(
-                  "Lainnya",
+                  "Others",
                   style: TypographyApp.profileItemTitle,
                 ),
                 SizedBox(
@@ -422,7 +368,7 @@ class ProfilePage extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Ketentuan Layanan",
+                              "Terms & Conditions",
                               style: TypographyApp.profileItem,
                             ),
                             Icon(
@@ -442,12 +388,13 @@ class ProfilePage extends ConsumerWidget {
                   onTap: () {
                     QuickAlert.show(
                         context: context,
-                        type: QuickAlertType.warning,
-                        title: 'Keluar',
-                        text: 'Apakah anda yakin ingin keluar dari akun ini?',
+                        type: QuickAlertType.confirm,
+                        title: 'Are you sure?',
+                        text: 'Do you want to logout',
+                        backgroundColor: Colors.white,
                         showCancelBtn: true,
-                        cancelBtnText: 'Batal',
-                        confirmBtnText: 'Keluar',
+                        cancelBtnText: 'Cancel',
+                        confirmBtnText: 'Logout',
                         confirmBtnColor: HexColor('#DB3F3F'),
                         onConfirmBtnTap: () {
                           controller.logout();
@@ -479,7 +426,7 @@ class ProfilePage extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Keluar",
+                              "Logout",
                               style: TypographyApp.profileItemRed,
                             ),
                             Icon(

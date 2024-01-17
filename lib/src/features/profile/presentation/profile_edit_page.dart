@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geats/src/common_widgets/input_form/dropdown_form_widget.dart';
+import 'package:geats/src/features/auth/domain/request_user.dart';
+import 'package:geats/src/features/common/presentation/common_controller.dart';
+import 'package:geats/src/features/common/presentation/common_state.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:geats/src/common_widgets/common_widgets.dart';
 import 'package:geats/src/constants/constants.dart';
 import 'package:geats/src/features/auth/domain/user.dart';
-import 'package:geats/src/features/profile/presentation/profile_controller.dart';
-import 'package:geats/src/features/profile/presentation/profile_state.dart';
 import 'package:geats/src/routes/routes.dart';
 import 'package:geats/src/shared/extensions/extensions.dart';
 import 'package:quickalert/quickalert.dart';
@@ -23,11 +25,13 @@ class ProfileEditPage extends ConsumerStatefulWidget {
 }
 
 class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
-  UserController get controller => ref.read(userControllerProvider.notifier);
-  UserState get state => ref.watch(userControllerProvider);
+  CommonController get controller =>
+      ref.read(commonControllerProvider.notifier);
+  CommonState get state => ref.watch(commonControllerProvider);
+
   TextEditingController get name => controller.nameController;
-  TextEditingController get price => controller.priceController;
-  TextEditingController get poly => controller.polyController;
+  TextEditingController get height => controller.heightController;
+  TextEditingController get weight => controller.weightController;
 
   @override
   void initState() {
@@ -40,6 +44,7 @@ class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -107,7 +112,7 @@ class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
                   child: TextButton(
                     onPressed: () {},
                     child: Text(
-                      "Ubah Foto",
+                      "Change Photo",
                       style: TypographyApp.eprofileBlueBtn,
                     ),
                   ),
@@ -116,7 +121,7 @@ class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
                   height: 20.h,
                 ),
                 Text(
-                  "Nama",
+                  "Name",
                   style: TypographyApp.eprofileLabel,
                 ),
                 TextFormField(
@@ -141,11 +146,11 @@ class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
                   height: 20.h,
                 ),
                 Text(
-                  "Price",
+                  "Height (cm)",
                   style: TypographyApp.eprofileLabel,
                 ),
                 TextFormField(
-                  controller: price,
+                  controller: height,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     border: UnderlineInputBorder(
@@ -167,11 +172,11 @@ class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
                   height: 20.h,
                 ),
                 Text(
-                  "Polyclinic",
+                  "Weight (kg)",
                   style: TypographyApp.eprofileLabel,
                 ),
                 TextFormField(
-                  controller: poly,
+                  controller: weight,
                   decoration: InputDecoration(
                     border: UnderlineInputBorder(
                       borderSide: BorderSide(
@@ -187,6 +192,75 @@ class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
                     ),
                   ),
                   style: TypographyApp.eprofileValue,
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Text(
+                  "Age",
+                  style: TypographyApp.eprofileLabel,
+                ),
+                TextFormField(
+                  controller: controller.ageController,
+                  decoration: InputDecoration(
+                    border: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: HexColor('#E5E5E5'),
+                        width: 1.w,
+                      ),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: HexColor('#E5E5E5'),
+                        width: 1.w,
+                      ),
+                    ),
+                  ),
+                  style: TypographyApp.eprofileValue,
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Text(
+                  "Your Goals",
+                  style: TypographyApp.eprofileLabel,
+                ),
+                Gap.h12,
+                DropdownFormWidget(
+                  value: state.weightGoal?.name ?? '',
+                  list: const [
+                    {'value': 'gain', 'text': 'Gain weight'},
+                    {'value': 'maintain', 'text': 'Maintain weight'},
+                    {'value': 'lose', 'text': 'Lose weight'},
+                  ],
+                  prefixIcon: Icons.wc,
+                  onChanged: (value) {
+                    if (value.isNotNull()) {
+                      controller.setWeightGoal(value);
+                    }
+                  },
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Text(
+                  "Your Activity",
+                  style: TypographyApp.eprofileLabel,
+                ),
+                Gap.h12,
+                DropdownFormWidget(
+                  value: state.activity?.name ?? '',
+                  list: const [
+                    {'value': 'rare', 'text': 'Little or no exercise'},
+                    {'value': 'medium', 'text': '2-3 exercise/weeks'},
+                    {'value': 'active', 'text': 'Very active'},
+                  ],
+                  prefixIcon: Icons.wc,
+                  onChanged: (value) {
+                    if (value.isNotNull()) {
+                      controller.setActivity(value);
+                    }
+                  },
                 ),
                 SizedBox(
                   height: 150.h,
@@ -212,10 +286,28 @@ class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
             backgroundColor: ColorApp.primary,
             padding: EdgeInsets.symmetric(horizontal: 87.w, vertical: 18.h),
           ),
-          onPressed: state.loadingValue is AsyncLoading
+          onPressed: state.isGetLoading is AsyncLoading
               ? null
               : () async {
-                  await controller.updateProfile();
+                  final user = RequestUser(
+                    id: state.user!.id,
+                    name: controller.nameController.text,
+                    height: double.parse(controller.heightController.text),
+                    weight: double.parse(controller.weightController.text),
+                    age: int.parse(controller.ageController.text),
+                    activity: state.activity!.name,
+                    weightGoal: state.weightGoal!.name,
+                  );
+                  final calculate = controller.calculateDiet(
+                      gender: '${state.user?.gender.name}',
+                      age: int.parse(controller.ageController.text),
+                      weight: double.parse(controller.weightController.text),
+                      height: double.parse(controller.heightController.text),
+                      activity: state.activity!,
+                      weightGoal: state.weightGoal!);
+                  await controller.updateProfile(user);
+                  await controller.updateDiet(calculate);
+
                   Future.delayed(const Duration(seconds: 1), () {
                     QuickAlert.show(
                         context: context,
@@ -229,10 +321,10 @@ class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
                         });
                   });
                 },
-          child: state.loadingValue is AsyncLoading
+          child: state.isGetLoading is AsyncLoading
               ? const LoadingWidget()
               : Text(
-                  'Ubah',
+                  "Save",
                   style: TypographyApp.homeOnBtn,
                 ),
         ),

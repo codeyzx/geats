@@ -52,6 +52,7 @@ class CommonRepository {
   Future<Result<String>> updateProfile(RequestUser user) async {
     try {
       await requestUserDb.doc(user.id).update(user.toJson());
+      await getProfile(user.id.toString());
       return const Result.success('Success');
     } catch (e, st) {
       return Result.failure(NetworkExceptions.getFirebaseException(e), st);

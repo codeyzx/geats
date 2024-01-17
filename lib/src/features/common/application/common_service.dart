@@ -48,7 +48,7 @@ class CommonService {
 
   Future<Result<String>> updateProfile(RequestUser user) async {
     var result = await _commonRepository.updateProfile(user);
-    await getProfile();
+
     return result.when(
       success: (data) {
         return Result.success(data);
