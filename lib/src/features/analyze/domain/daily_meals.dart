@@ -1,6 +1,5 @@
 import 'package:geats/src/features/analyze/domain/meal.dart';
 import 'package:geats/src/shared/extensions/extensions.dart';
-import 'package:logger/logger.dart';
 
 class DailyMeals {
   final DateTime date;

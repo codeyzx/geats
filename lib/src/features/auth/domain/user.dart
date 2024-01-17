@@ -1,6 +1,5 @@
 import 'package:geats/src/features/analyze/domain/daily_meals.dart';
 import 'package:geats/src/shared/extensions/date_time.dart';
-import 'package:logger/logger.dart';
 
 enum Gender {
   male('Male'),

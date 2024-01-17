@@ -22,6 +22,8 @@ class InputFormWidget extends StatelessWidget {
   final VoidCallback? onTap;
   final String? errorText;
   final String? Function(String?)? validator;
+  final bool? isHeight;
+  final bool? isWeight;
 
   const InputFormWidget({
     super.key,
@@ -31,6 +33,8 @@ class InputFormWidget extends StatelessWidget {
     this.onChanged,
     this.errorText,
     this.validator,
+    this.isHeight,
+    this.isWeight,
   })  : inputFormType = InputFormType.normal,
         isObscure = false,
         readOnly = false,
@@ -49,6 +53,8 @@ class InputFormWidget extends StatelessWidget {
         isObscure = false,
         readOnly = true,
         onChanged = null,
+        isHeight = null,
+        isWeight = null,
         onObscureTap = null;
 
   const InputFormWidget.password({
@@ -63,6 +69,8 @@ class InputFormWidget extends StatelessWidget {
     this.validator,
   })  : inputFormType = InputFormType.password,
         readOnly = false,
+        isHeight = null,
+        isWeight = null,
         onTap = null;
 
   bool get isPassword => inputFormType == InputFormType.password;
@@ -78,14 +86,14 @@ class InputFormWidget extends StatelessWidget {
       style: TypographyApp.loginOnInput,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
+        contentPadding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 16.h),
         errorText: errorText,
         hintText: hintText,
         hintStyle: TypographyApp.loginOffInput,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5.r),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r),
           borderSide: BorderSide(
-            color: HexColor('#9D9D9D'),
+            color: ColorApp.secondary.withOpacity(0.4),
             width: 1.w,
           ),
         ),
@@ -93,6 +101,20 @@ class InputFormWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.r),
           borderSide: BorderSide(
             color: ColorApp.primary,
+            width: 2.w,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5.r),
+          borderSide: BorderSide(
+            color: ColorApp.red,
+            width: 2.w,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5.r),
+          borderSide: BorderSide(
+            color: ColorApp.red,
             width: 2.w,
           ),
         ),
@@ -108,7 +130,49 @@ class InputFormWidget extends StatelessWidget {
                   color: HexColor('#9D9D9D'),
                 ),
               )
-            : const SizedBox.shrink(),
+            : isHeight != null
+                ? Container(
+                    height: 53.h,
+                    width: 50.w,
+                    decoration: BoxDecoration(
+                      color: ColorApp.primary,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(7.r),
+                        bottomRight: Radius.circular(7.r),
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'CM',
+                        style: TypographyApp.text1.copyWith(
+                          color: ColorApp.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  )
+                : isWeight != null
+                    ? Container(
+                        height: 53.h,
+                        width: 50.w,
+                        decoration: BoxDecoration(
+                          color: ColorApp.primary,
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(7.r),
+                            bottomRight: Radius.circular(7.r),
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'KG',
+                            style: TypographyApp.text1.copyWith(
+                              color: ColorApp.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox.shrink(),
       ),
       readOnly: readOnly,
       onTap: onTap,

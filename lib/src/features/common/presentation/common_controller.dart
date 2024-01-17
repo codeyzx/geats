@@ -71,7 +71,7 @@ class CommonController extends StateNotifier<CommonState> {
     );
   }
 
-  void setGender(String? gender) {
+  void setGender(String gender) {
     state = state.copyWith(
       gender: gender,
     );
@@ -80,6 +80,20 @@ class CommonController extends StateNotifier<CommonState> {
   void setAge(String? age) {
     state = state.copyWith(
       age: age,
+    );
+  }
+
+  void setActivity(String? activity) {
+    final activityValue = activity?.getActivity;
+    state = state.copyWith(
+      activity: activityValue,
+    );
+  }
+
+  void setWeightGoal(String? weight) {
+    final weightValue = weight?.getWeightGoal;
+    state = state.copyWith(
+      weightGoal: weightValue,
     );
   }
 

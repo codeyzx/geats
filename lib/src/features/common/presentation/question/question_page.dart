@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geats/src/common_widgets/common_widgets.dart';
 import 'package:geats/src/constants/constants.dart';
+import 'package:geats/src/features/auth/domain/user.dart';
 import 'package:geats/src/features/common/presentation/common_controller.dart';
 import 'package:geats/src/features/common/presentation/question/widget/widget.dart';
-import 'package:geats/src/routes/app_routes.dart';
-import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class QuestionPage extends ConsumerWidget {
@@ -30,52 +30,61 @@ class QuestionPage extends ConsumerWidget {
             },
             children: [
               QuestionContent(
-                imageAsset: 'assets/images/question_img_3.png', 
-                imageWidth: 375, 
-                imageHeight: 281,
-                title: 'Which is Your Preference?', 
-                child: Column(
-                  children: [
-                    Gap.h12,
-                    const QuestionButtonForm(choice: "Weight Gain"),
-                    Gap.h12,
-                    const QuestionButtonForm(choice: "Maintain Weight"),
-                    Gap.h12,
-                    const QuestionButtonForm(choice: "Weight Loss"),
-                  ],
-                )
-              ),
+                  imageAsset: 'assets/images/question_img_3.png',
+                  imageWidth: 375,
+                  imageHeight: 281,
+                  title: 'Which is Your Preference?',
+                  child: Column(
+                    children: WeightGoal.values
+                        .map(
+                          (e) => Column(
+                            children: [
+                              Gap.h16,
+                              QuestionButtonForm(
+                                  isActivity: false,
+                                  choice: e.value,
+                                  controller: controllerState,
+                                  state: state),
+                            ],
+                          ),
+                        )
+                        .toList(),
+                  )),
               QuestionContent(
-                imageAsset: 'assets/images/question_img_1.png', 
-                imageWidth: 375, 
-                imageHeight: 281, 
-                title: 'Your Personal Information',
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 40.w),
-                  child: const Column(
-                    children: [
-                      QuestionDropDownForm(),
-                      QuestionInputForm(),
-                    ],
-                  ),
-                )
-              ),
+                  imageAsset: 'assets/images/question_img_1.png',
+                  imageWidth: 375,
+                  imageHeight: 281,
+                  title: 'Your Personal Information',
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 40.w),
+                    child: const Column(
+                      children: [
+                        QuestionDropDownForm(),
+                        QuestionInputForm(),
+                      ],
+                    ),
+                  )),
               QuestionContent(
-                imageAsset: 'assets/images/question_img_2.png', 
-                imageWidth: 375, 
-                imageHeight: 281, 
-                title: 'How is Your Activity?',
-                child: Column(
-                  children: [
-                    Gap.h12,
-                    const QuestionButtonForm(choice: "Little or no exersice"),
-                    Gap.h12,
-                    const QuestionButtonForm(choice: "2-3 exercise/weeks"),
-                    Gap.h12,
-                    const QuestionButtonForm(choice: "Very active"),
-                  ],
-                )
-              ),
+                  imageAsset: 'assets/images/question_img_2.png',
+                  imageWidth: 375,
+                  imageHeight: 281,
+                  title: 'How is Your Activity?',
+                  child: Column(
+                    children: Activity.values
+                        .map(
+                          (e) => Column(
+                            children: [
+                              Gap.h16,
+                              QuestionButtonForm(
+                                  isActivity: true,
+                                  choice: e.value,
+                                  controller: controllerState,
+                                  state: state),
+                            ],
+                          ),
+                        )
+                        .toList(),
+                  )),
             ],
           ),
         ),
@@ -117,7 +126,12 @@ class QuestionPage extends ConsumerWidget {
                             duration: const Duration(milliseconds: 500),
                             curve: Curves.easeInOut,
                           );
-                          context.goNamed(Routes.botNavBar.name);
+                          if (controllerState.heightController.text.isEmpty ||
+                              controllerState.weightController.text.isEmpty) {
+                            hideSnackBar(context);
+                            appSnackBar(
+                                context, Colors.red, 'Field do not empty');
+                          }
                         },
                         child: Text(
                           'Mulai',
@@ -195,7 +209,7 @@ class QuestionPage extends ConsumerWidget {
                     ),
                   ],
                 ),
-            ),
+              ),
       ),
     );
   }

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geats/src/common_widgets/common_widgets.dart';
 import 'package:geats/src/features/common/presentation/common_controller.dart';
 import 'package:geats/src/features/common/presentation/common_state.dart';
+import 'package:geats/src/features/common/presentation/question/question_page.dart';
 import 'package:geats/src/features/home/presentation/home_controller.dart';
 import 'package:geats/src/features/home/presentation/home_state.dart';
 import 'package:geats/src/shared/extensions/extensions.dart';
@@ -46,11 +47,18 @@ class _HomePageState extends ConsumerState<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(
-                child: Text(
-                  'Home',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 24.sp,
+                child: InkWell(
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const QuestionPage(),
+                      )),
+                  child: Text(
+                    'Home',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 24.sp,
+                    ),
                   ),
                 ),
               ),

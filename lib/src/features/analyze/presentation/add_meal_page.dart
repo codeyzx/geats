@@ -12,7 +12,6 @@ import 'package:geats/src/routes/app_routes.dart';
 import 'package:geats/src/shared/extensions/extensions.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:logger/logger.dart';
 
 class AddMealPage extends ConsumerStatefulWidget {
   const AddMealPage({super.key});

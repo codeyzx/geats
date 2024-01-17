@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geats/src/features/auth/domain/user.dart';
 
 extension XString on String {
   String get trimList => replaceAll('[', '').replaceAll(']', '');
@@ -30,6 +31,32 @@ extension XString on String {
         return 'Minggu';
       default:
         return 'Senin';
+    }
+  }
+
+  Activity get getActivity {
+    switch (this) {
+      case 'Little or no exercise':
+        return Activity.rare;
+      case '2-3 exercise/weeks':
+        return Activity.medium;
+      case 'Very active':
+        return Activity.active;
+      default:
+        return Activity.rare;
+    }
+  }
+
+  WeightGoal get getWeightGoal {
+    switch (this) {
+      case 'Lose weight':
+        return WeightGoal.lose;
+      case 'Maintain weight':
+        return WeightGoal.maintain;
+      case 'Gain weight':
+        return WeightGoal.gain;
+      default:
+        return WeightGoal.lose;
     }
   }
 

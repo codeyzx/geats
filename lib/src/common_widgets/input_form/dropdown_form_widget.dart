@@ -22,14 +22,14 @@ class DropdownFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: SizeApp.h72,
+      height: SizeApp.h52,
       child: InputDecorator(
         decoration: InputDecoration(
           errorText: errorText,
-          border: OutlineInputBorder(
+          enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12.r),
             borderSide: BorderSide(
-              color: ColorApp.grey.withOpacity(.7),
+              color: ColorApp.secondary.withOpacity(0.4),
               width: 1.w,
             ),
           ),
@@ -43,7 +43,10 @@ class DropdownFormWidget extends StatelessWidget {
               size: 26,
               color: Colors.grey.shade400,
             ),
-            style: TypographyApp.text1,
+            style: TypographyApp.text1.copyWith(
+              color: ColorApp.secondary.withOpacity(0.9),
+              fontWeight: FontWeight.w600,
+            ),
             isExpanded: true,
             borderRadius: BorderRadius.circular(12.r),
             onChanged: (String? newValue) {

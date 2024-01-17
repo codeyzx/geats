@@ -115,7 +115,7 @@ class ProfilePage extends ConsumerWidget {
                           height: 2.h,
                         ),
                         Text(
-                          '78 Kilogram',
+                          state.user!.email,
                           style: TypographyApp.profileJob,
                         ),
                       ],

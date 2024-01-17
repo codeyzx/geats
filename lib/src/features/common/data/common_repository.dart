@@ -4,7 +4,6 @@ import 'package:geats/src/features/analyze/domain/daily_meals.dart';
 import 'package:geats/src/features/auth/domain/request_user.dart';
 import 'package:geats/src/features/auth/domain/user.dart';
 import 'package:geats/src/services/services.dart';
-import 'package:logger/logger.dart';
 
 class CommonRepository {
   final userDb = FirebaseFirestore.instance.collection('user').withConverter(

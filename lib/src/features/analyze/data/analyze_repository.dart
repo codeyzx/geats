@@ -5,7 +5,6 @@ import 'package:geats/src/features/analyze/domain/meal.dart';
 import 'package:geats/src/features/analyze/domain/meals.dart';
 import 'package:geats/src/features/domain.dart';
 import 'package:geats/src/services/services.dart';
-import 'package:logger/logger.dart';
 
 class AnalyzeRepository {
   final mealDb = FirebaseFirestore.instance.collection('meals').withConverter(

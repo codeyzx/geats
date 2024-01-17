@@ -6,7 +6,6 @@ import 'package:geats/src/features/analyze/domain/meals.dart';
 import 'package:geats/src/features/analyze/presentation/analyze_state.dart';
 import 'package:geats/src/features/analyze/domain/daily_meals.dart';
 import 'package:geats/src/shared/extensions/extensions.dart';
-import 'package:logger/logger.dart';
 
 class AnalyzeController extends StateNotifier<AnalyzeState> {
   final AnalyzeService _analyzeService;
