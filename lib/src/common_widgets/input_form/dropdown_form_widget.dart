@@ -22,7 +22,7 @@ class DropdownFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: SizeApp.h52,
+      height: SizeApp.h56,
       child: InputDecorator(
         decoration: InputDecoration(
           errorText: errorText,

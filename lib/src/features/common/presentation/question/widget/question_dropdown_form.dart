@@ -25,7 +25,7 @@ class QuestionDropDownForm extends ConsumerWidget {
             {'value': 'Male', 'text': 'Male'},
             {'value': 'Female', 'text': 'Female'},
           ],
-          prefixIcon: Icons.person,
+          prefixIcon: Icons.wc,
           onChanged: (value) {
             if (value.isNotNull()) {
               controller.setGender(value.toString());
@@ -36,7 +36,7 @@ class QuestionDropDownForm extends ConsumerWidget {
         DropdownFormWidget(
           value: state.age,
           list: state.ageList,
-          prefixIcon: Icons.person,
+          prefixIcon: Icons.looks_one,
           onChanged: (value) {
             if (value.isNotNull()) {
               controller.setAge(value.toString());

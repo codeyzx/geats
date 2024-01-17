@@ -6,7 +6,6 @@ import 'package:geats/src/constants/constants.dart';
 import 'package:geats/src/features/auth/domain/user.dart';
 import 'package:geats/src/features/common/presentation/common_controller.dart';
 import 'package:geats/src/features/common/presentation/question/widget/widget.dart';
-import 'package:logger/logger.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class QuestionPage extends ConsumerWidget {
@@ -91,7 +90,7 @@ class QuestionPage extends ConsumerWidget {
         bottomSheet: state.isLastPage
             ? Container(
                 padding: EdgeInsets.only(bottom: 52.h, left: 34.w, right: 34.w),
-                height: 170.h,
+                height: 140.h,
                 color: Colors.white,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -144,7 +143,7 @@ class QuestionPage extends ConsumerWidget {
               )
             : Container(
                 padding: EdgeInsets.only(bottom: 52.h, left: 34.w, right: 34.w),
-                height: 170.h,
+                height: 140.h,
                 color: Colors.white,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
