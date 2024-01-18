@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:geats/src/features/analyze/presentation/analyze_controller.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:geats/src/common_widgets/async_value/async_value_widget.dart';
@@ -69,7 +68,7 @@ class ProfilePage extends ConsumerWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    state.user!.profileUrl.toString().isNotEmpty
+                    data?.profileUrl != null && data?.profileUrl != ''
                         ? CachedNetworkImage(
                             imageUrl: data?.profileUrl ?? '',
                             progressIndicatorBuilder:
@@ -104,7 +103,7 @@ class ProfilePage extends ConsumerWidget {
                             child: FittedBox(
                               fit: BoxFit.scaleDown,
                               child: Text(
-                                state.user!.name,
+                                '${data?.name}',
                                 style: TypographyApp.homeDetName,
                               ),
                             ),
@@ -114,7 +113,7 @@ class ProfilePage extends ConsumerWidget {
                           height: 2.h,
                         ),
                         Text(
-                          state.user!.email,
+                          '${data?.email}',
                           style: TypographyApp.profileJob,
                         ),
                       ],
@@ -145,7 +144,7 @@ class ProfilePage extends ConsumerWidget {
                       Routes.editProfile.name,
                       extra: Extras(
                         datas: {
-                          ExtrasKey.user: state.user,
+                          ExtrasKey.user: data,
                         },
                       ),
                     );

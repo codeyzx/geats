@@ -109,12 +109,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                       child: Padding(
                         padding:
                             EdgeInsets.only(left: 10.w, top: 25.h, bottom: 9.h),
-                        child: Row(
+                        child: const Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-
-                          ],
+                          children: [],
                         ),
                       ),
                     )),
@@ -200,8 +198,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black),
                                     overflow: TextOverflow.ellipsis,
-                                  )
-                                ),
+                                  )),
                             ],
                           ),
                         ),
@@ -252,8 +249,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black),
                                     overflow: TextOverflow.ellipsis,
-                                  )
-                                ),
+                                  )),
                             ],
                           ),
                         ),
@@ -304,8 +300,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black),
                                     overflow: TextOverflow.ellipsis,
-                                  )
-                                ),
+                                  )),
                             ],
                           ),
                         ),

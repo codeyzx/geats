@@ -47,11 +47,11 @@ extension XString on String {
 
   Activity get getActivity {
     switch (this) {
-      case 'Little or no exercise':
+      case 'rare':
         return Activity.rare;
-      case '2-3 exercise/weeks':
+      case 'medium':
         return Activity.medium;
-      case 'Very active':
+      case 'active':
         return Activity.active;
       default:
         return Activity.rare;
@@ -60,11 +60,11 @@ extension XString on String {
 
   WeightGoal get getWeightGoal {
     switch (this) {
-      case 'Lose weight':
+      case 'lose':
         return WeightGoal.lose;
-      case 'Maintain weight':
+      case 'maintain':
         return WeightGoal.maintain;
-      case 'Gain weight':
+      case 'gain':
         return WeightGoal.gain;
       default:
         return WeightGoal.lose;

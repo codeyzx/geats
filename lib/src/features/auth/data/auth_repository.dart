@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geats/src/features/domain.dart';
 import 'package:geats/src/services/services.dart';
-import 'package:logger/logger.dart';
 
 class AuthRepository {
   final userDb = FirebaseFirestore.instance.collection('user').withConverter(
@@ -57,7 +56,6 @@ class AuthRepository {
 
       return const Result.success(true);
     } catch (e, stackTrace) {
-      Logger().e('Error $e');
       return Result.failure(
           NetworkExceptions.getFirebaseException(e), stackTrace);
     }

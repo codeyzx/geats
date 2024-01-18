@@ -35,7 +35,6 @@ class CommonService {
 
   Future<Result<String?>> updateDiet(Map<String, dynamic> user) async {
     var result = await _commonRepository.updateDiet(user);
-    await getProfile();
     return result.when(
       success: (data) {
         return Result.success(data);

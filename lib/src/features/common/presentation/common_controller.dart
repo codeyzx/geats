@@ -10,7 +10,6 @@ import 'package:geats/src/features/common/application/common_service.dart';
 import 'package:geats/src/features/profile/presentation/profile_page.dart';
 import 'package:geats/src/features/common/presentation/common_state.dart';
 import 'package:geats/src/features/home/presentation/home_page.dart';
-
 import 'package:geats/src/routes/app_routes.dart';
 
 class CommonController extends StateNotifier<CommonState> {
@@ -53,12 +52,12 @@ class CommonController extends StateNotifier<CommonState> {
     heightController.text = user.height.toString();
     weightController.text = user.weight.toString();
     ageController.text = user.age.toString();
-    state.activity = user.activity;
-    state.weightGoal = user.weightGoal;
 
     state = state.copyWith(
       user: user,
       userValue: AsyncData(user),
+      activity: user.activity,
+      weightGoal: user.weightGoal,
     );
   }
 
@@ -155,14 +154,14 @@ class CommonController extends StateNotifier<CommonState> {
     );
   }
 
-  Map<String, dynamic> calculateDiet({
-    required double weight,
-    required double height,
-    required int age,
-    required String gender,
-    required WeightGoal weightGoal,
-    required Activity activity,
-  }) {
+  Map<String, dynamic> calculateDiet(
+      {required double weight,
+      required double height,
+      required int age,
+      required String gender,
+      required WeightGoal weightGoal,
+      required Activity activity,
+      bool? isUpdateProfile}) {
     double bmr = (10 * weight) +
         (6.25 * height) -
         (5 * age) +
@@ -242,19 +241,30 @@ class CommonController extends StateNotifier<CommonState> {
     sugar = sugar.ceilToDouble();
 
     // Display results
-    return {
-      'caloriesGoal': dailyCalories.toInt(),
-      'proteinsGoal': protein.toInt(),
-      'fatGoal': fats.toInt(),
-      'carbsGoal': carbs.toInt(),
-      'sugarsGoal': sugar.toInt(),
-      'gender': gender,
-      'age': age,
-      'weight': weight,
-      'height': height,
-      'activity': activity.name,
-      'weightGoal': weightGoal.name,
-    };
+    if (isUpdateProfile != null && isUpdateProfile) {
+      return {
+        'caloriesGoal': dailyCalories.toInt(),
+        'proteinsGoal': protein.toInt(),
+        'fatGoal': fats.toInt(),
+        'carbsGoal': carbs.toInt(),
+        'sugarsGoal': sugar.toInt(),
+        'weightGoal': weightGoal.name,
+      };
+    } else {
+      return {
+        'caloriesGoal': dailyCalories.toInt(),
+        'proteinsGoal': protein.toInt(),
+        'fatGoal': fats.toInt(),
+        'carbsGoal': carbs.toInt(),
+        'sugarsGoal': sugar.toInt(),
+        'gender': gender,
+        'age': age,
+        'weight': weight,
+        'height': height,
+        'activity': activity.name,
+        'weightGoal': weightGoal.name,
+      };
+    }
   }
 
   String? validateWeight(String? value) {

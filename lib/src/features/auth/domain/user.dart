@@ -91,11 +91,11 @@ class User {
         weight: json['weight'] == null ? 0 : json['weight'].toDouble(),
         age: json['age'] ?? 0,
         activity: Activity.values.firstWhere(
-          (e) => e.value == json['activity'],
+          (e) => e.name == json['activity'],
           orElse: () => Activity.rare,
         ),
         weightGoal: WeightGoal.values.firstWhere(
-          (e) => e.value == json['weightGoal'],
+          (e) => e.name == json['weightGoal'],
           orElse: () => WeightGoal.maintain,
         ),
         caloriesGoal: json['caloriesGoal'] ?? 0,
