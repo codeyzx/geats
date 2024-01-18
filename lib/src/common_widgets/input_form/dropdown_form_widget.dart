@@ -38,6 +38,7 @@ class DropdownFormWidget extends StatelessWidget {
         child: DropdownButtonHideUnderline(
           child: DropdownButton<String>(
             value: value,
+            menuMaxHeight: 300.h,
             icon: Icon(
               Icons.keyboard_arrow_down_rounded,
               size: 26,

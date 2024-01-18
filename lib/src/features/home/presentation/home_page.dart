@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,6 +11,7 @@ import 'package:geats/src/features/common/presentation/common_controller.dart';
 import 'package:geats/src/features/common/presentation/common_state.dart';
 import 'package:geats/src/features/home/presentation/home_controller.dart';
 import 'package:geats/src/features/home/presentation/home_state.dart';
+import 'package:geats/src/features/recycle/domain/foodbank.dart';
 import 'package:geats/src/shared/extensions/extensions.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -23,9 +25,6 @@ class HomePage extends ConsumerStatefulWidget {
 class _HomePageState extends ConsumerState<HomePage> {
   HomeController get controller => ref.read(homeControllerProvider.notifier);
   HomeState get state => ref.watch(homeControllerProvider);
-  // CheckupController get checkupController =>
-  //     ref.read(checkupControllerProvider.notifier);
-  // CheckupState get checkupState => ref.watch(checkupControllerProvider);
   CommonState get commonState => ref.watch(commonControllerProvider);
   AnalyzeState get analyzeState => ref.watch(analyzeControllerProvider);
   AnalyzeController get analyzeController =>
@@ -34,11 +33,9 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   void initState() {
     safeRebuild(() {
-      // controller.fetchHome(
-      //   '${commonState.user?.id}',
-      //   DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
-      //   DateTime.now().add(const Duration(days: 1)),
-      // );
+      analyzeController.getDate();
+      analyzeController.getDailyMeals(
+          DateTime.now(), commonState.user?.dailyMeals);
     });
     super.initState();
   }
@@ -65,21 +62,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.nightlight_outlined,
-                                color: Colors.black,
-                              ),
-                              Gap.w4,
-                              Text('Good Night',
-                                  style: TextStyle(
-                                      fontFamily: FontFamily.poppins,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black)),
-                            ],
-                          ),
+                          getGreetingWidget(),
                           Gap.h4,
                           Text(
                             commonState.user!.name,
@@ -91,11 +74,13 @@ class _HomePageState extends ConsumerState<HomePage> {
                           )
                         ],
                       ),
-                      SizedBox(
-                        width: 43.w,
-                        child: const Icon(
-                          Icons.notifications_none_outlined,
-                          color: Colors.black,
+                      InkWell(
+                        child: SizedBox(
+                          width: 43.w,
+                          child: const Icon(
+                            Icons.notifications_none_outlined,
+                            color: Colors.black,
+                          ),
                         ),
                       )
                     ],
@@ -112,190 +97,242 @@ class _HomePageState extends ConsumerState<HomePage> {
                         padding:
                             EdgeInsets.only(left: 16.w, top: 16.h, bottom: 5.h),
                         child: AsyncValueWidget(
-                          value: commonState.userValue, 
-                          data: (data) => Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 14.h),
-                              child: AsyncValueWidget(
-                                value: analyzeState.dailyMealsValue,
-                                data: (dailyMeals) => Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                            value: commonState.userValue,
+                            data: (data) => Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 5.w, vertical: 14.h),
+                                  child: AsyncValueWidget(
+                                    value: analyzeState.dailyMealsValue,
+                                    data: (dailyMeals) => Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
-                                        Transform.scale(
-                                            scale: 1.01,
-                                            child: Stack(
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Transform.scale(
+                                              scale: 1.01,
+                                              child: Stack(
+                                                children: [
+                                                  SizedBox(
+                                                    height: 140,
+                                                    width: 140,
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      value: (data!
+                                                                  .caloriesGoal -
+                                                              dailyMeals
+                                                                  .totalCalories) /
+                                                          (data.caloriesGoal ==
+                                                                  0
+                                                              ? 1
+                                                              : data
+                                                                  .caloriesGoal),
+                                                      strokeWidth: 10,
+                                                      backgroundColor:
+                                                          HexColor('#85C2C6'),
+                                                      valueColor:
+                                                          AlwaysStoppedAnimation<
+                                                                  Color>(
+                                                              HexColor(
+                                                                  '#F8FAE5')),
+                                                    ),
+                                                  ),
+                                                  Positioned.fill(
+                                                    child: Center(
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          SizedBox(
+                                                              height: 35.h),
+                                                          Text(
+                                                            (data.caloriesGoal -
+                                                                    dailyMeals
+                                                                        .totalCalories)
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                fontSize: 30.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                color: Colors
+                                                                    .white),
+                                                          ),
+                                                          Text(
+                                                            'Calorie left',
+                                                            style: TextStyle(
+                                                                fontSize:
+                                                                    12.sp),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          width: 30.w,
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
+                                                Text(
+                                                  '${dailyMeals.totalCalories.toString()} cal',
+                                                  style: TextStyle(
+                                                      fontSize: 16.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.white),
+                                                ),
                                                 SizedBox(
-                                                  height: 140,
-                                                  width: 140,
-                                                  child: CircularProgressIndicator(
-                                                    value: (data!.caloriesGoal - dailyMeals.totalCalories) /
-                                                        (data.caloriesGoal == 0
-                                                            ? 1
-                                                            : data.caloriesGoal),
-                                                    strokeWidth: 10,
-                                                    backgroundColor: HexColor('#85C2C6'),
-                                                    valueColor:
-                                                        AlwaysStoppedAnimation<Color>(
-                                                            HexColor('#F8FAE5')),
+                                                  width: 125.w,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                15.r)),
+                                                    child:
+                                                        LinearProgressIndicator(
+                                                      value: dailyMeals
+                                                              .totalCalories /
+                                                          (data.caloriesGoal ==
+                                                                  0
+                                                              ? 1
+                                                              : data
+                                                                  .caloriesGoal),
+                                                      minHeight: 10.h,
+                                                      backgroundColor:
+                                                          HexColor('#85C2C6'),
+                                                      valueColor:
+                                                          AlwaysStoppedAnimation<
+                                                                  Color>(
+                                                              HexColor(
+                                                                  '#151515')),
+                                                    ),
                                                   ),
                                                 ),
-                                                Positioned.fill(
-                                                  child: Center(
-                                                    child: Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                      children: [
-                                                        SizedBox(
-                                                          height: 35.h
-                                                        ),
-                                                        Text(
-                                                          (data.caloriesGoal - dailyMeals.totalCalories).toString(),
-                                                          style: TextStyle(
-                                                            fontSize: 30.sp, 
-                                                            fontWeight: FontWeight.w500,
-                                                            color: Colors.white
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          'Calorie left',
-                                                          style: TextStyle(fontSize: 12.sp),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ), 
+                                                Text(
+                                                  'Consumed',
+                                                  style: TextStyle(
+                                                      fontSize: 12.sp,
+                                                      color:
+                                                          HexColor('#D3FFEC')),
                                                 )
                                               ],
                                             ),
-                                          ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      width: 30.w,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              '${dailyMeals.totalCalories.toString()} cal',
-                                              style: TextStyle(
-                                                fontSize: 16.sp,
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.white
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 125.w,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.all(Radius.circular(15.r)),
-                                                child: LinearProgressIndicator(
-                                                  value: dailyMeals.totalCalories /
-                                                      (data.caloriesGoal == 0
-                                                          ? 1
-                                                          : data.caloriesGoal),
-                                                  minHeight: 10.h,
-                                                  backgroundColor: HexColor('#85C2C6'),
-                                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                                      HexColor('#151515')),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  '${dailyMeals.totalFat.toString()} gr',
+                                                  style: TextStyle(
+                                                      fontSize: 16.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.white),
                                                 ),
-                                              ),
-                                            ),
-                                            Text(
-                                              'Consumed',
-                                              style: TextStyle(
-                                                fontSize: 10.sp,
-                                                color: HexColor('#D3FFEC')
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              '${dailyMeals.totalFat.toString()} gr',
-                                              style: TextStyle(
-                                                fontSize: 16.sp,
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.white
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 125.w,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.all(Radius.circular(15.r)),
-                                                child: LinearProgressIndicator(
-                                                  value: dailyMeals.totalFat /
-                                                      (data.fatGoal == 0
-                                                          ? 1
-                                                          : data.fatGoal),
-                                                  minHeight: 10.h,
-                                                  backgroundColor: HexColor('#85C2C6'),
-                                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                                      HexColor('#B19470')),
+                                                SizedBox(
+                                                  width: 125.w,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                15.r)),
+                                                    child:
+                                                        LinearProgressIndicator(
+                                                      value: dailyMeals
+                                                              .totalFat /
+                                                          (data.fatGoal == 0
+                                                              ? 1
+                                                              : data.fatGoal),
+                                                      minHeight: 10.h,
+                                                      backgroundColor:
+                                                          HexColor('#85C2C6'),
+                                                      valueColor:
+                                                          AlwaysStoppedAnimation<
+                                                                  Color>(
+                                                              HexColor(
+                                                                  '#B19470')),
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
+                                                Text(
+                                                  'Fat',
+                                                  style: TextStyle(
+                                                      fontSize: 12.sp,
+                                                      color:
+                                                          HexColor('#D3FFEC')),
+                                                )
+                                              ],
                                             ),
-                                            Text(
-                                              'Fat',
-                                              style: TextStyle(
-                                                fontSize: 10.sp,
-                                                color: HexColor('#D3FFEC')
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              '${dailyMeals.totalProteins.toString()} gr',
-                                              style: TextStyle(
-                                                fontSize: 16.sp,
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.white
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 125.w,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.all(Radius.circular(15.r)),
-                                                child: LinearProgressIndicator(
-                                                  value: dailyMeals.totalProteins /
-                                                      (data.proteinsGoal == 0
-                                                          ? 1
-                                                          : data.proteinsGoal),
-                                                  minHeight: 10.h,
-                                                  backgroundColor: HexColor('#85C2C6'),
-                                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                                      HexColor('#FF9800')),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  '${dailyMeals.totalProteins.toString()} gr',
+                                                  style: TextStyle(
+                                                      fontSize: 16.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.white),
                                                 ),
-                                              ),
-                                            ),
-                                            Text(
-                                              'Protein',
-                                              style: TextStyle(
-                                                fontSize: 10.sp,
-                                                color: HexColor('#D3FFEC')
-                                              ),
+                                                SizedBox(
+                                                  width: 125.w,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                15.r)),
+                                                    child:
+                                                        LinearProgressIndicator(
+                                                      value: dailyMeals
+                                                              .totalProteins /
+                                                          (data.proteinsGoal ==
+                                                                  0
+                                                              ? 1
+                                                              : data
+                                                                  .proteinsGoal),
+                                                      minHeight: 10.h,
+                                                      backgroundColor:
+                                                          HexColor('#85C2C6'),
+                                                      valueColor:
+                                                          AlwaysStoppedAnimation<
+                                                                  Color>(
+                                                              HexColor(
+                                                                  '#FF9800')),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Text(
+                                                  'Protein',
+                                                  style: TextStyle(
+                                                      fontSize: 12.sp,
+                                                      color:
+                                                          HexColor('#D3FFEC')),
+                                                )
+                                              ],
                                             )
                                           ],
                                         )
                                       ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            )
-                        ),
+                                    ),
+                                  ),
+                                )),
                       ),
                     )),
                 SizedBox(
@@ -330,7 +367,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   ),
                 ),
                 SizedBox(
-                  height: 240.h,
+                  height: 200.h,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
@@ -490,9 +527,6 @@ class _HomePageState extends ConsumerState<HomePage> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 16.h,
-                ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12.w),
                   child: Row(
@@ -635,6 +669,69 @@ class _HomePageState extends ConsumerState<HomePage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class GreetingsWidget extends StatelessWidget {
+  final IconData iconData;
+  final Color iconColor;
+  final String greeting;
+
+  const GreetingsWidget({
+    super.key,
+    required this.iconData,
+    required this.iconColor,
+    required this.greeting,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(
+          iconData,
+          color: iconColor,
+        ),
+        const SizedBox(width: 4),
+        Text(
+          greeting,
+          style: TextStyle(
+            fontFamily: FontFamily.poppins,
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w500,
+            color: iconColor,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+Widget getGreetingWidget() {
+  DateTime now = DateTime.now();
+  int hour = now.hour;
+
+  if (hour >= 6 && hour < 12) {
+    // Morning
+    return const GreetingsWidget(
+      iconData: Icons.wb_sunny,
+      iconColor: Colors.orange,
+      greeting: 'Good Morning',
+    );
+  } else if (hour >= 12 && hour < 18) {
+    // Afternoon
+    return const GreetingsWidget(
+      iconData: Icons.wb_cloudy,
+      iconColor: Colors.blue,
+      greeting: 'Good Afternoon',
+    );
+  } else {
+    // Evening/Night
+    return const GreetingsWidget(
+      iconData: Icons.nightlight_outlined,
+      iconColor: Colors.black,
+      greeting: 'Good Evening',
     );
   }
 }

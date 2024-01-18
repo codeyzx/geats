@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geats/src/features/analyze/presentation/add_meal_page.dart';
 import 'package:geats/src/features/common/presentation/question/question_page.dart';
+import 'package:geats/src/features/recycle/presentation/add_recycle_page.dart';
+import 'package:geats/src/features/recycle/presentation/location_recycle_page.dart';
 import 'package:geats/src/features/recycle/presentation/recycle_page.dart';
+import 'package:geats/src/features/recycle/presentation/tutorial_recycle_page.dart';
 import 'package:geats/src/features/scan/presentation/nutrition_facts_page.dart';
 import 'package:geats/src/features/scan/presentation/scan_page.dart';
 import 'package:go_router/go_router.dart';
@@ -27,6 +30,9 @@ enum Routes {
   recycle,
   editProfile,
   addMeal,
+  addRecycle,
+  locationRecycle,
+  tutorialRecycle,
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -95,6 +101,21 @@ final goRouterProvider = Provider<GoRouter>(
           path: '/recylce',
           name: Routes.recycle.name,
           builder: (context, state) => const RecyclePage(),
+        ),
+        GoRoute(
+          path: '/add-recycle',
+          name: Routes.addRecycle.name,
+          builder: (context, state) => const AddRecyclePage(),
+        ),
+        GoRoute(
+          path: '/location-recycle',
+          name: Routes.locationRecycle.name,
+          builder: (context, state) => const LocationRecyclePage(),
+        ),
+        GoRoute(
+          path: '/tutorial-recycle',
+          name: Routes.tutorialRecycle.name,
+          builder: (context, state) => const TutorialRecyclePage(),
         ),
         GoRoute(
           path: '/edit-profile-page',

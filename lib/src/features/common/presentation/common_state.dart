@@ -20,12 +20,14 @@ class CommonState {
   WeightGoal? weightGoal;
   final List<Map<String, String>> ageList;
   final AsyncValue<bool?> isGetLoading;
+  final bool isOverlayVisible;
 
   CommonState({
     this.isHomeActive = true,
     this.isAnalyzeActive = false,
     this.isRecycleActive = false,
     this.isProfileActive = false,
+    this.isOverlayVisible = false,
     this.isLastPage = false,
     this.currentIndex = 0,
     this.currentScreen = const HomePage(),
@@ -55,6 +57,7 @@ class CommonState {
     Activity? activity,
     WeightGoal? weightGoal,
     AsyncValue<bool?>? isGetLoading,
+    bool? isOverlayVisible,
   }) {
     return CommonState(
       isHomeActive: isHomeActive ?? this.isHomeActive,
@@ -71,6 +74,7 @@ class CommonState {
       activity: activity ?? this.activity,
       weightGoal: weightGoal ?? this.weightGoal,
       isGetLoading: isGetLoading ?? this.isGetLoading,
+      isOverlayVisible: isOverlayVisible ?? this.isOverlayVisible,
     );
   }
 }
