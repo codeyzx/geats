@@ -23,7 +23,7 @@ jobs:
           flutter build apk --split-per-abi --release --obfuscate --split-debug-info=./symbols/
       - name: 🔨 Build APPBUNDLE
         run: |
-          flutter build appbundle --split-per-abi --release --obfuscate --split-debug-info=./symbols/
+          flutter build appbundle --release --obfuscate --split-debug-info=./symbols/
       - name: ⚙️ Create Github Release
         uses: ncipollo/release-action@v1
         with:
