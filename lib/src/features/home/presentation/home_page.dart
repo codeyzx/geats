@@ -9,8 +9,6 @@ import 'package:geats/src/features/analyze/presentation/analyze_controller.dart'
 import 'package:geats/src/features/analyze/presentation/analyze_state.dart';
 import 'package:geats/src/features/common/presentation/common_controller.dart';
 import 'package:geats/src/features/common/presentation/common_state.dart';
-import 'package:geats/src/features/home/presentation/home_controller.dart';
-import 'package:geats/src/features/home/presentation/home_state.dart';
 import 'package:geats/src/shared/extensions/extensions.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -22,8 +20,6 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
-  HomeController get controller => ref.read(homeControllerProvider.notifier);
-  HomeState get state => ref.watch(homeControllerProvider);
   CommonState get commonState => ref.watch(commonControllerProvider);
   AnalyzeState get analyzeState => ref.watch(analyzeControllerProvider);
   AnalyzeController get analyzeController =>

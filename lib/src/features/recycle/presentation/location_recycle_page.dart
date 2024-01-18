@@ -13,7 +13,6 @@ class LocationRecyclePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(recycleControllerProvider);
-    final controller = ref.read(recycleControllerProvider.notifier);
 
     return Scaffold(
       backgroundColor: Colors.white,

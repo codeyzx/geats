@@ -32,6 +32,7 @@ class DioClient {
         // if (token != null) 'Authorization': 'Bearer $token',
       };
 
+    // ignore: deprecated_member_use
     (_dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =
