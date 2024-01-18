@@ -33,24 +33,24 @@ class OnboardPage extends ConsumerWidget {
             children: [
               OnboardingContent(
                 imageAsset: Assets.images.onboardImg1,
-                imageWidth: 236.26,
-                imageHeight: 211.91,
+                imageWidth: 300,
+                imageHeight: 230,
                 title: "Personalized Diet Planning",
                 subtitle:
                     "Tailor your daily diet to your preferences and nutritional needs for a personalized wellness journey.",
               ),
               OnboardingContent(
                 imageAsset: Assets.images.onboardImg2,
-                imageWidth: 132.48,
-                imageHeight: 215.16,
+                imageWidth: 300,
+                imageHeight: 230,
                 title: "Nutrition Compare",
                 subtitle:
                     "Make informed, healthier choices by comparing nutritional content of different foods.",
               ),
               OnboardingContent(
                 imageAsset: Assets.images.onboardImg3,
-                imageWidth: 254.23,
-                imageHeight: 199.03,
+                imageWidth: 300,
+                imageHeight: 230,
                 title: "Minimize food waste",
                 subtitle:
                     "Share leftovers with food banks,\nearn reward coins, and unlock exclusive perks!",
@@ -99,7 +99,7 @@ class OnboardPage extends ConsumerWidget {
                           context.goNamed(Routes.login.name);
                         },
                         child: Text(
-                          'Mulai Sekarang',
+                          'Start Now',
                           style: TypographyApp.onBoardBtnText,
                         ),
                       ),
@@ -142,7 +142,7 @@ class OnboardPage extends ConsumerWidget {
                               controller.jumpToPage(2);
                             },
                             child: Text(
-                              'Lewati',
+                              'Skip',
                               style: TypographyApp.onBoardUnBtnText,
                             ),
                           ),
@@ -162,7 +162,7 @@ class OnboardPage extends ConsumerWidget {
                               );
                             },
                             child: Text(
-                              'Lanjut',
+                              'Next',
                               style: TypographyApp.onBoardBtnText,
                             ),
                           ),

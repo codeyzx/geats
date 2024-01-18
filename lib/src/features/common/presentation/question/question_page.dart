@@ -157,7 +157,7 @@ class QuestionPage extends ConsumerWidget {
                           }
                         },
                         child: Text(
-                          'Mulai',
+                          'Start',
                           style: TypographyApp.onBoardBtnText,
                         ),
                       ),

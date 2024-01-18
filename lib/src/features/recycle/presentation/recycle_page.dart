@@ -379,7 +379,7 @@ class _RecyclePageState extends ConsumerState<RecyclePage> {
                               ),
                               child: Center(
                                 child: Icon(
-                                  Icons.article,
+                                  Icons.shopping_bag_rounded,
                                   color: HexColor('#85B1B4'),
                                   size: 50.w,
                                 ),
