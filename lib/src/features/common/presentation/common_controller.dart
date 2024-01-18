@@ -140,15 +140,19 @@ class CommonController extends StateNotifier<CommonState> {
     );
   }
 
-  void setActivity(String? activity) {
-    final activityValue = activity?.getActivity;
+  void setActivity(String? activity, {bool? isUpdateProfile}) {
+    final activityValue = isUpdateProfile != null && isUpdateProfile
+        ? activity?.getActivityProfile
+        : activity?.getActivity;
     state = state.copyWith(
       activity: activityValue,
     );
   }
 
-  void setWeightGoal(String? weight) {
-    final weightValue = weight?.getWeightGoal;
+  void setWeightGoal(String? weight, {bool? isUpdateProfile}) {
+    final weightValue = isUpdateProfile != null && isUpdateProfile
+        ? weight?.getWeightGoalProfile
+        : weight?.getWeightGoal;
     state = state.copyWith(
       weightGoal: weightValue,
     );

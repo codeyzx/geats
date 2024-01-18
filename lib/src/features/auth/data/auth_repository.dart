@@ -47,6 +47,7 @@ class AuthRepository {
         'name': requestRegister.name,
         'email': requestRegister.email,
         'isSuccessRegister': false,
+        'coins': 0,
       };
 
       await FirebaseFirestore.instance

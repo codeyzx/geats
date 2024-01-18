@@ -9,6 +9,7 @@ import 'package:geats/src/features/common/presentation/common_controller.dart';
 import 'package:geats/src/routes/app_routes.dart';
 import 'package:geats/src/routes/extras.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:logger/logger.dart';
 import 'package:quickalert/quickalert.dart';
 
 class ProfilePage extends ConsumerWidget {
@@ -193,6 +194,7 @@ class ProfilePage extends ConsumerWidget {
                 ),
                 InkWell(
                   onTap: () async {
+                    Logger().e('${state.user?.coins}');
                     // await analyzeController.add();
                   },
                   child: Row(

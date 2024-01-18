@@ -39,9 +39,9 @@ class QuestionButtonForm extends ConsumerWidget {
       child: InkWell(
         onTap: () {
           if (isActivity) {
-            controller.setActivity(choice);
+            controller.setActivity(choice, isUpdateProfile: true);
           } else {
-            controller.setWeightGoal(choice);
+            controller.setWeightGoal(choice, isUpdateProfile: true);
           }
         },
         child: Center(

@@ -58,6 +58,19 @@ extension XString on String {
     }
   }
 
+  Activity get getActivityProfile {
+    switch (this) {
+      case 'Little or no exercise':
+        return Activity.rare;
+      case '2-3 exercise/weeks':
+        return Activity.medium;
+      case 'Very active':
+        return Activity.active;
+      default:
+        return Activity.rare;
+    }
+  }
+
   WeightGoal get getWeightGoal {
     switch (this) {
       case 'lose':
@@ -66,6 +79,19 @@ extension XString on String {
         return WeightGoal.maintain;
       case 'gain':
         return WeightGoal.gain;
+      default:
+        return WeightGoal.lose;
+    }
+  }
+
+  WeightGoal get getWeightGoalProfile {
+    switch (this) {
+      case 'Gain weight':
+        return WeightGoal.gain;
+      case 'Maintain weight':
+        return WeightGoal.maintain;
+      case 'Lose weight':
+        return WeightGoal.lose;
       default:
         return WeightGoal.lose;
     }
