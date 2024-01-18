@@ -21,12 +21,10 @@ jobs:
           flutter pub get
       - name: 🔨 Build APK
         run: |
-          cd client
-          flutter build apk --split-per-abi --release
+          flutter build apk --split-per-abi --release --obfuscate --split-debug-info=./symbols/
       - name: 🔨 Build APPBUNDLE
         run: |
-          cd client
-          flutter build appbundle --release
+          flutter build appbundle --split-per-abi --release --obfuscate --split-debug-info=./symbols/
       - name: ⚙️ Create Github Release
         uses: ncipollo/release-action@v1
         with:
