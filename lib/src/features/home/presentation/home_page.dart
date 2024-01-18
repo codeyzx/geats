@@ -28,6 +28,8 @@ class _HomePageState extends ConsumerState<HomePage> {
   // CheckupState get checkupState => ref.watch(checkupControllerProvider);
   CommonState get commonState => ref.watch(commonControllerProvider);
   AnalyzeState get analyzeState => ref.watch(analyzeControllerProvider);
+  AnalyzeController get analyzeController =>
+      ref.read(analyzeControllerProvider.notifier);
 
   @override
   void initState() {
@@ -101,6 +103,16 @@ class _HomePageState extends ConsumerState<HomePage> {
                 ),
                 SizedBox(
                   height: 16.h,
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    await analyzeController.add();
+                  },
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                  child: Text(
+                    'ADD MEAL',
+                    style: TypographyApp.analyzeAddBtn,
+                  ),
                 ),
                 Card(
                     color: ColorApp.primary,
