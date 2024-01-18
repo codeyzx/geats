@@ -71,6 +71,7 @@ The app is not just an information provider; it also functions as a health educa
 
 - Flutter
 - Firebase (Authentication, Firestore Database, Storage)
+- Google ML Kit
 
 ## Getting Started
 
@@ -133,6 +134,11 @@ The app is not just an information provider; it also functions as a health educa
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
+## Created by Orbit Team 
+- Yahya Alfon Sinaga (Hacker)
+- Muhammad Favian Jiwani (Hipster)
+- Raka Iskandar (Hacker)
+- Rafka Imanda Putra (Hustler)
 <!-- MARKDOWN LINKS & IMAGES -->
 
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
