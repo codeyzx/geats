@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -545,17 +546,30 @@ class _AnalyzePageState extends ConsumerState<AnalyzePage> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     e.image.isNotEmpty
-                                        ? Container(
+                                        ? CachedNetworkImage(
                                             width: 50.w,
                                             height: 50.w,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.r),
-                                              image: DecorationImage(
-                                                image: NetworkImage(e.image),
-                                                fit: BoxFit.cover,
+                                            imageUrl: e.image,
+                                            imageBuilder:
+                                                (context, imageProvider) =>
+                                                    Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.r),
+                                                image: DecorationImage(
+                                                  image: imageProvider,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
+                                            placeholder: (context, url) =>
+                                                const Center(
+                                              child:
+                                                  CircularProgressIndicator(),
+                                            ),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    const Icon(Icons.error),
                                           )
                                         : Container(
                                             width: 50.w,

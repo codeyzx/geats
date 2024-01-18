@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +11,6 @@ import 'package:geats/src/features/common/presentation/common_controller.dart';
 import 'package:geats/src/features/common/presentation/common_state.dart';
 import 'package:geats/src/features/home/presentation/home_controller.dart';
 import 'package:geats/src/features/home/presentation/home_state.dart';
-import 'package:geats/src/features/recycle/domain/foodbank.dart';
 import 'package:geats/src/shared/extensions/extensions.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -30,6 +29,15 @@ class _HomePageState extends ConsumerState<HomePage> {
   AnalyzeController get analyzeController =>
       ref.read(analyzeControllerProvider.notifier);
 
+  List<String> articles = [
+    'How To Get Started With Healthy Eating',
+    'The Importance of Regular Exercise in Daily Life',
+    'Top 10 Tips for Stress Management',
+    'Exploring Different Meditation Techniques for Beginners',
+    'Healthy Sleep Habits: A Guide to Better Sleep',
+    'Balancing Work and Life: Strategies for a Productive Lifestyle',
+  ];
+
   @override
   void initState() {
     safeRebuild(() {
@@ -47,7 +55,8 @@ class _HomePageState extends ConsumerState<HomePage> {
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            padding: EdgeInsets.only(
+                left: 16.w, right: 16.w, top: 0.h, bottom: 30.h),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -367,15 +376,16 @@ class _HomePageState extends ConsumerState<HomePage> {
                   ),
                 ),
                 SizedBox(
-                  height: 200.h,
-                  child: ListView(
+                  height: 210.h,
+                  child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    children: [
-                      InkWell(
+                    itemCount: articles.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
                         onTap: () {},
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 8.w, vertical: 7),
+                              horizontal: 15.w, vertical: 10),
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(18.r),
@@ -392,17 +402,17 @@ class _HomePageState extends ConsumerState<HomePage> {
                               Container(
                                 width: 170.56.w,
                                 height: 110.h,
-                                padding: EdgeInsets.only(
-                                    top: 7.h,
-                                    left: 7.w,
-                                    right: 128.w,
-                                    bottom: 57.h),
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.r),
-                                    image: const DecorationImage(
-                                        fit: BoxFit.fill,
-                                        image: NetworkImage(
-                                            'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/7effe0c9-16a3-4e45-b4df-73fd25b34b87/dg80etl-dbb6b229-a693-443c-906c-71a1d8ce5add.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzdlZmZlMGM5LTE2YTMtNGU0NS1iNGRmLTczZmQyNWIzNGI4N1wvZGc4MGV0bC1kYmI2YjIyOS1hNjkzLTQ0M2MtOTA2Yy03MWExZDhjZTVhZGQuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.VASt7CgMX_QFTqknwi4S7vA0GCZg3vc0fapN_89g5Ws'))),
+                                  borderRadius: BorderRadius.circular(10.r),
+                                  color: HexColor('#F1F5F5'),
+                                ),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.article,
+                                    color: HexColor('#85B1B4'),
+                                    size: 50.w,
+                                  ),
+                                ),
                               ),
                               SizedBox(
                                 height: 10.h,
@@ -410,121 +420,20 @@ class _HomePageState extends ConsumerState<HomePage> {
                               SizedBox(
                                   width: 170.56.w,
                                   child: Text(
-                                    'International Band Musician',
+                                    articles[index],
                                     style: TextStyle(
                                         fontFamily: FontFamily.poppins,
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black),
                                     overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
                                   )),
                             ],
                           ),
                         ),
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 8.w, vertical: 7),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(18.r),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: HexColor('#505588').withOpacity(0.06),
-                                  offset: const Offset(0, 8),
-                                  blurRadius: 30,
-                                ),
-                              ]),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 170.56.w,
-                                height: 110.h,
-                                padding: EdgeInsets.only(
-                                    top: 7.h,
-                                    left: 7.w,
-                                    right: 128.w,
-                                    bottom: 57.h),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.r),
-                                    image: const DecorationImage(
-                                        fit: BoxFit.fill,
-                                        image: NetworkImage(
-                                            'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/7effe0c9-16a3-4e45-b4df-73fd25b34b87/dg80etl-dbb6b229-a693-443c-906c-71a1d8ce5add.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzdlZmZlMGM5LTE2YTMtNGU0NS1iNGRmLTczZmQyNWIzNGI4N1wvZGc4MGV0bC1kYmI2YjIyOS1hNjkzLTQ0M2MtOTA2Yy03MWExZDhjZTVhZGQuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.VASt7CgMX_QFTqknwi4S7vA0GCZg3vc0fapN_89g5Ws'))),
-                              ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              SizedBox(
-                                  width: 170.56.w,
-                                  child: Text(
-                                    'International Band Musician',
-                                    style: TextStyle(
-                                        fontFamily: FontFamily.poppins,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.black),
-                                    overflow: TextOverflow.ellipsis,
-                                  )),
-                            ],
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 8.w, vertical: 7),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(18.r),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: HexColor('#505588').withOpacity(0.06),
-                                  offset: const Offset(0, 8),
-                                  blurRadius: 30,
-                                ),
-                              ]),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 170.56.w,
-                                height: 110.h,
-                                padding: EdgeInsets.only(
-                                    top: 7.h,
-                                    left: 7.w,
-                                    right: 128.w,
-                                    bottom: 57.h),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.r),
-                                    image: const DecorationImage(
-                                        fit: BoxFit.fill,
-                                        image: NetworkImage(
-                                            'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/7effe0c9-16a3-4e45-b4df-73fd25b34b87/dg80etl-dbb6b229-a693-443c-906c-71a1d8ce5add.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzdlZmZlMGM5LTE2YTMtNGU0NS1iNGRmLTczZmQyNWIzNGI4N1wvZGc4MGV0bC1kYmI2YjIyOS1hNjkzLTQ0M2MtOTA2Yy03MWExZDhjZTVhZGQuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.VASt7CgMX_QFTqknwi4S7vA0GCZg3vc0fapN_89g5Ws'))),
-                              ),
-                              SizedBox(
-                                height: 15.h,
-                              ),
-                              SizedBox(
-                                  width: 170.56.w,
-                                  child: Text(
-                                    'International Band Musician',
-                                    style: TextStyle(
-                                        fontFamily: FontFamily.poppins,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.black),
-                                    overflow: TextOverflow.ellipsis,
-                                  )),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                      );
+                    },
                   ),
                 ),
                 Padding(
@@ -567,17 +476,28 @@ class _HomePageState extends ConsumerState<HomePage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 e.image.isNotEmpty
-                                    ? Container(
+                                    ? CachedNetworkImage(
                                         width: 50.w,
                                         height: 50.w,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10.r),
-                                          image: DecorationImage(
-                                            image: NetworkImage(e.image),
-                                            fit: BoxFit.cover,
+                                        imageUrl: e.image,
+                                        imageBuilder:
+                                            (context, imageProvider) =>
+                                                Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10.r),
+                                            image: DecorationImage(
+                                              image: imageProvider,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         ),
+                                        placeholder: (context, url) =>
+                                            const Center(
+                                          child: CircularProgressIndicator(),
+                                        ),
+                                        errorWidget: (context, url, error) =>
+                                            const Icon(Icons.error),
                                       )
                                     : Container(
                                         width: 50.w,

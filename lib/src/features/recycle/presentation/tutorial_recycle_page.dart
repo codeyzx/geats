@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:geats/src/common_widgets/async_value/async_value_widget.dart';
 import 'package:geats/src/constants/constants.dart';
-import 'package:geats/src/features/recycle/domain/foodbank.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class TutorialRecyclePage extends ConsumerWidget {

@@ -26,7 +26,20 @@ class _RecyclePageState extends ConsumerState<RecyclePage> {
   RecycleController get recycleController =>
       ref.read(recycleControllerProvider.notifier);
   RecycleState get recycleState => ref.watch(recycleControllerProvider);
-
+  List<String> products = [
+    'Voucher Pulsa 25k',
+    'Voucher Belanja 25k',
+    'Mobile Data Package (10GB)',
+    'Online Streaming Subscription (1 Month)',
+    'Gaming Credits for In-App Purchases',
+    'Digital Gift Card for Popular E-Store',
+    'E-book Bundle: Bestselling Novels Collection',
+    'Virtual Fitness Class Pass (1 Month)',
+    'Online Language Learning Course Subscription',
+    'Premium Software License Key',
+    'Digital Art and Design Assets Pack',
+    'Music Streaming Service Subscription (3 Months)',
+  ];
   @override
   void initState() {
     safeRebuild(() {
@@ -42,7 +55,8 @@ class _RecyclePageState extends ConsumerState<RecyclePage> {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          padding:
+              EdgeInsets.only(left: 16.w, right: 16.w, top: 0.h, bottom: 30.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -188,33 +202,6 @@ class _RecyclePageState extends ConsumerState<RecyclePage> {
                   ),
                 ),
               ),
-              // Center(
-              //   child: ElevatedButton(
-              //     onPressed: () {
-              //       context.pushNamed(Routes.recycle.name);
-              //     },
-              //     style: ElevatedButton.styleFrom(
-              //       backgroundColor: Colors.black,
-              //       minimumSize: Size(0.8.sw, 48.h),
-              //       shape: RoundedRectangleBorder(
-              //         borderRadius: BorderRadius.circular(12.r),
-              //       ),
-              //     ),
-              //     child: Row(
-              //       mainAxisAlignment: MainAxisAlignment.center,
-              //       children: [
-              //         const Icon(
-              //           Icons.add,
-              //           color: Colors.white,
-              //         ),
-              //         Text(
-              //           'RECYCLE NOW',
-              //           style: TypographyApp.whiteOnBtnSmall,
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),
               SizedBox(
                 height: 25.h,
               ),
@@ -360,15 +347,16 @@ class _RecyclePageState extends ConsumerState<RecyclePage> {
                 ],
               ),
               SizedBox(
-                height: 160.h,
-                child: ListView(
+                height: 210.h,
+                child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  children: [
-                    InkWell(
+                  itemCount: products.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
                       onTap: () {},
                       child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 8.w, vertical: 7),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 15.w, vertical: 10),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(18.r),
@@ -385,37 +373,15 @@ class _RecyclePageState extends ConsumerState<RecyclePage> {
                             Container(
                               width: 170.56.w,
                               height: 110.h,
-                              padding: EdgeInsets.only(
-                                  top: 7.h,
-                                  left: 7.w,
-                                  right: 128.w,
-                                  bottom: 57.h),
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.r),
-                                  image: const DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: NetworkImage(
-                                          'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/7effe0c9-16a3-4e45-b4df-73fd25b34b87/dg80etl-dbb6b229-a693-443c-906c-71a1d8ce5add.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzdlZmZlMGM5LTE2YTMtNGU0NS1iNGRmLTczZmQyNWIzNGI4N1wvZGc4MGV0bC1kYmI2YjIyOS1hNjkzLTQ0M2MtOTA2Yy03MWExZDhjZTVhZGQuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.VASt7CgMX_QFTqknwi4S7vA0GCZg3vc0fapN_89g5Ws'))),
-                              child: Container(
-                                width: 35.21.w,
-                                height: 36.52.h,
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.70),
-                                  borderRadius: BorderRadius.circular(10.r),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      '280',
-                                      style: TypographyApp.recycleSaleValue,
-                                    ),
-                                    Text(
-                                      'COINS',
-                                      style: TypographyApp.recycleSaleValueSub,
-                                    ),
-                                  ],
+                                borderRadius: BorderRadius.circular(10.r),
+                                color: HexColor('#F1F5F5'),
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  Icons.article,
+                                  color: HexColor('#85B1B4'),
+                                  size: 50.w,
                                 ),
                               ),
                             ),
@@ -425,158 +391,21 @@ class _RecyclePageState extends ConsumerState<RecyclePage> {
                             SizedBox(
                                 width: 170.56.w,
                                 child: Text(
-                                  'Voucher Belanja 25RB',
-                                  style: TypographyApp.recycleSaleTitle,
+                                  products[index],
+                                  style: TextStyle(
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black),
                                   overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
                                 )),
                           ],
                         ),
                       ),
-                    ),
-                    InkWell(
-                      onTap: () {},
-                      child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 8.w, vertical: 7),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(18.r),
-                            boxShadow: [
-                              BoxShadow(
-                                color: HexColor('#505588').withOpacity(0.06),
-                                offset: const Offset(0, 8),
-                                blurRadius: 30,
-                              ),
-                            ]),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 170.56.w,
-                              height: 110.h,
-                              padding: EdgeInsets.only(
-                                  top: 7.h,
-                                  left: 7.w,
-                                  right: 128.w,
-                                  bottom: 57.h),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.r),
-                                  image: const DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: NetworkImage(
-                                          'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/7effe0c9-16a3-4e45-b4df-73fd25b34b87/dg80etl-dbb6b229-a693-443c-906c-71a1d8ce5add.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzdlZmZlMGM5LTE2YTMtNGU0NS1iNGRmLTczZmQyNWIzNGI4N1wvZGc4MGV0bC1kYmI2YjIyOS1hNjkzLTQ0M2MtOTA2Yy03MWExZDhjZTVhZGQuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.VASt7CgMX_QFTqknwi4S7vA0GCZg3vc0fapN_89g5Ws'))),
-                              child: Container(
-                                width: 35.21.w,
-                                height: 36.52.h,
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.70),
-                                  borderRadius: BorderRadius.circular(10.r),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      '280',
-                                      style: TypographyApp.recycleSaleValue,
-                                    ),
-                                    Text(
-                                      'COINS',
-                                      style: TypographyApp.recycleSaleValueSub,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            SizedBox(
-                                width: 170.56.w,
-                                child: Text(
-                                  'Voucher Belanja 25RB',
-                                  style: TypographyApp.recycleSaleTitle,
-                                  overflow: TextOverflow.ellipsis,
-                                )),
-                          ],
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {},
-                      child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 8.w, vertical: 7),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(18.r),
-                            boxShadow: [
-                              BoxShadow(
-                                color: HexColor('#505588').withOpacity(0.06),
-                                offset: const Offset(0, 8),
-                                blurRadius: 30,
-                              ),
-                            ]),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 170.56.w,
-                              height: 110.h,
-                              padding: EdgeInsets.only(
-                                  top: 7.h,
-                                  left: 7.w,
-                                  right: 128.w,
-                                  bottom: 57.h),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.r),
-                                  image: const DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: NetworkImage(
-                                          'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/7effe0c9-16a3-4e45-b4df-73fd25b34b87/dg80etl-dbb6b229-a693-443c-906c-71a1d8ce5add.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzdlZmZlMGM5LTE2YTMtNGU0NS1iNGRmLTczZmQyNWIzNGI4N1wvZGc4MGV0bC1kYmI2YjIyOS1hNjkzLTQ0M2MtOTA2Yy03MWExZDhjZTVhZGQuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.VASt7CgMX_QFTqknwi4S7vA0GCZg3vc0fapN_89g5Ws'))),
-                              child: Container(
-                                width: 35.21.w,
-                                height: 36.52.h,
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.70),
-                                  borderRadius: BorderRadius.circular(10.r),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      '280',
-                                      style: TypographyApp.recycleSaleValue,
-                                    ),
-                                    Text(
-                                      'COINS',
-                                      style: TypographyApp.recycleSaleValueSub,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            SizedBox(
-                                width: 170.56.w,
-                                child: Text(
-                                  'Voucher Belanja 25RB',
-                                  style: TypographyApp.recycleSaleTitle,
-                                  overflow: TextOverflow.ellipsis,
-                                )),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ),
-              SizedBox(
-                height: 50.h,
-              )
             ],
           ),
         ),
