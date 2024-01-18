@@ -446,20 +446,20 @@ class RecycleSheetWidget extends StatelessWidget {
                       ),
                       Gap.h16,
                       Text(
-                        'Pilih opsi recycle',
+                        'Choose Recycle Type',
                         style: TypographyApp.titleScan,
                       ),
                       const SizedBox(
                         height: 20,
                       ),
                       Text(
-                        'Pilih "Send Food Waste" jika ingin mengirim sampah makanan ke bank sampah  atau "Recycle Now" untuk mendaur ulang sekarang.',
+                        'Select "Send Food Waste" if you want to send your \nfood waste to the waste bank or "Recycle Now"\nto recycle now',
                         style: TypographyApp.descScan,
                         textAlign: TextAlign.center,
                       ),
                     ],
                   ),
-                  Gap.h36,
+                  Gap.h24,
                   Column(
                     children: [
                       InkWell(
