@@ -104,7 +104,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                       height: 205.h,
                       child: Padding(
                         padding:
-                            EdgeInsets.only(left: 16.w, top: 16.h, bottom: 5.h),
+                            EdgeInsets.only(left: 16.w, top: 14.h, bottom: 5.h),
                         child: AsyncValueWidget(
                             value: commonState.userValue,
                             data: (data) => Padding(
