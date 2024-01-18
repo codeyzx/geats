@@ -41,6 +41,8 @@ Geats is an innovative application designed to address issues related to food su
 
 ## Features
 
+<img  src="assets/icons/ic_launcher.png"  alt="Geats App">
+
 ### 1. Nutritional Analysis with AI
 
 Geats utilizes Artificial Intelligence (AI) to analyze nutrition accurately and quickly. Users can easily access real-time information about calories, nutrients, and other nutritional aspects of the food they consume.
