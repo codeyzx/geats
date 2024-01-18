@@ -104,27 +104,197 @@ class _HomePageState extends ConsumerState<HomePage> {
                 SizedBox(
                   height: 16.h,
                 ),
-                ElevatedButton(
-                  onPressed: () async {
-                    await analyzeController.add();
-                  },
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                  child: Text(
-                    'ADD MEAL',
-                    style: TypographyApp.analyzeAddBtn,
-                  ),
-                ),
                 Card(
                     color: ColorApp.primary,
                     child: SizedBox(
-                      height: 192.h,
+                      height: 205.h,
                       child: Padding(
                         padding:
-                            EdgeInsets.only(left: 10.w, top: 25.h, bottom: 9.h),
-                        child: const Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [],
+                            EdgeInsets.only(left: 16.w, top: 16.h, bottom: 5.h),
+                        child: AsyncValueWidget(
+                          value: commonState.userValue, 
+                          data: (data) => Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 14.h),
+                              child: AsyncValueWidget(
+                                value: analyzeState.dailyMealsValue,
+                                data: (dailyMeals) => Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Transform.scale(
+                                            scale: 1.01,
+                                            child: Stack(
+                                              children: [
+                                                SizedBox(
+                                                  height: 140,
+                                                  width: 140,
+                                                  child: CircularProgressIndicator(
+                                                    value: (data!.caloriesGoal - dailyMeals.totalCalories) /
+                                                        (data.caloriesGoal == 0
+                                                            ? 1
+                                                            : data.caloriesGoal),
+                                                    strokeWidth: 10,
+                                                    backgroundColor: HexColor('#85C2C6'),
+                                                    valueColor:
+                                                        AlwaysStoppedAnimation<Color>(
+                                                            HexColor('#F8FAE5')),
+                                                  ),
+                                                ),
+                                                Positioned.fill(
+                                                  child: Center(
+                                                    child: Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                      children: [
+                                                        SizedBox(
+                                                          height: 35.h
+                                                        ),
+                                                        Text(
+                                                          (data.caloriesGoal - dailyMeals.totalCalories).toString(),
+                                                          style: TextStyle(
+                                                            fontSize: 30.sp, 
+                                                            fontWeight: FontWeight.w500,
+                                                            color: Colors.white
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          'Calorie left',
+                                                          style: TextStyle(fontSize: 12.sp),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ), 
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: 30.w,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              '${dailyMeals.totalCalories.toString()} cal',
+                                              style: TextStyle(
+                                                fontSize: 16.sp,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.white
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 125.w,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.all(Radius.circular(15.r)),
+                                                child: LinearProgressIndicator(
+                                                  value: dailyMeals.totalCalories /
+                                                      (data.caloriesGoal == 0
+                                                          ? 1
+                                                          : data.caloriesGoal),
+                                                  minHeight: 10.h,
+                                                  backgroundColor: HexColor('#85C2C6'),
+                                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                                      HexColor('#151515')),
+                                                ),
+                                              ),
+                                            ),
+                                            Text(
+                                              'Consumed',
+                                              style: TextStyle(
+                                                fontSize: 10.sp,
+                                                color: HexColor('#D3FFEC')
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              '${dailyMeals.totalFat.toString()} gr',
+                                              style: TextStyle(
+                                                fontSize: 16.sp,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.white
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 125.w,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.all(Radius.circular(15.r)),
+                                                child: LinearProgressIndicator(
+                                                  value: dailyMeals.totalFat /
+                                                      (data.fatGoal == 0
+                                                          ? 1
+                                                          : data.fatGoal),
+                                                  minHeight: 10.h,
+                                                  backgroundColor: HexColor('#85C2C6'),
+                                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                                      HexColor('#B19470')),
+                                                ),
+                                              ),
+                                            ),
+                                            Text(
+                                              'Fat',
+                                              style: TextStyle(
+                                                fontSize: 10.sp,
+                                                color: HexColor('#D3FFEC')
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              '${dailyMeals.totalProteins.toString()} gr',
+                                              style: TextStyle(
+                                                fontSize: 16.sp,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.white
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 125.w,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.all(Radius.circular(15.r)),
+                                                child: LinearProgressIndicator(
+                                                  value: dailyMeals.totalProteins /
+                                                      (data.proteinsGoal == 0
+                                                          ? 1
+                                                          : data.proteinsGoal),
+                                                  minHeight: 10.h,
+                                                  backgroundColor: HexColor('#85C2C6'),
+                                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                                      HexColor('#FF9800')),
+                                                ),
+                                              ),
+                                            ),
+                                            Text(
+                                              'Protein',
+                                              style: TextStyle(
+                                                fontSize: 10.sp,
+                                                color: HexColor('#D3FFEC')
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )
                         ),
                       ),
                     )),

@@ -223,7 +223,7 @@ class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
                   {'value': 'maintain', 'text': 'Maintain weight'},
                   {'value': 'lose', 'text': 'Lose weight'},
                 ],
-                prefixIcon: Icons.wc,
+                prefixIcon: Icons.monitor_weight,
                 onChanged: (value) {
                   controller.setWeightGoal(value);
                 },
@@ -243,7 +243,7 @@ class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
                   {'value': 'medium', 'text': '2-3 exercise/weeks'},
                   {'value': 'active', 'text': 'Very active'},
                 ],
-                prefixIcon: Icons.wc,
+                prefixIcon: Icons.access_time_filled,
                 onChanged: (value) {
                   if (value.isNotNull()) {
                     controller.setActivity(value);

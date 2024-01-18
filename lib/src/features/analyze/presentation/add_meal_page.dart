@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geats/gen/fonts.gen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geats/src/common_widgets/async_value/async_value_widget.dart';
 import 'package:geats/src/constants/constants.dart';
@@ -61,6 +62,7 @@ class _AddMealPageState extends ConsumerState<AddMealPage> {
               color: Colors.black,
               fontSize: 20.sp,
               fontWeight: FontWeight.w600,
+              fontFamily: FontFamily.poppins
             ),
           ),
           actions: [
