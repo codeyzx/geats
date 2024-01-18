@@ -22,9 +22,9 @@ class NutriFacts {
       fat: json['nutriments']['fat'] == null
           ? 0
           : json['nutriments']['fat'].toDouble(),
-      carbs: json['nutriments']['carbsohydrates'] == null
+      carbs: json['nutriments']['carbohydrates'] == null
           ? 0
-          : json['nutriments']['carbsohydrates'].toDouble(),
+          : json['nutriments']['carbohydrates'].toDouble(),
       proteins: json['nutriments']['proteins'] == null
           ? 0
           : json['nutriments']['proteins'].toDouble(),
